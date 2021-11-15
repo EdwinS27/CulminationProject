@@ -44,7 +44,7 @@ public class Movement : MonoBehaviour {
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1000)) {
 
-                Debug.Log("Right Clicked");
+                //Debug.Log("Right Clicked");
                 targetDestination = hit.point;
 
                 SetTargetRotation(targetDestination);
@@ -80,7 +80,7 @@ public class Movement : MonoBehaviour {
         // i need to be checking this when my character is moving
         if (Vector3.Distance(transform.position, adjustedtargetdestination) < distanceToStop) {
             transform.position = adjustedtargetdestination;
-            Debug.Log("character has reached their destination and should stop moving!\nAlso resetting the value of distance to stop");
+            //Debug.Log("character has reached their destination and should stop moving!\nAlso resetting the value of distance to stop");
             distanceToStop = 0.01f;
             walking = false;
         }
@@ -91,7 +91,7 @@ public class Movement : MonoBehaviour {
         // This might be the place I need to look at aim the Q
         lookAtTarget = new Vector3(
             target.x - transform.position.x,
-            transform.position.y,
+            0,
             target.z - transform.position.z
             );
         charRotation = Quaternion.LookRotation(lookAtTarget);

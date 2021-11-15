@@ -3,6 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Targetable : MonoBehaviour {
-    public enum EnemyType { MINION  }
+    public enum EnemyType {MINION , ENEMY, MONSTER};
     public EnemyType enemyType;
 }

@@ -4,26 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour {
-
-
     public Slider playerHealthSlider3D;
-    Slider playerHealthSlider2D;
-
     Stats statsScript;
-
-    // Start is called before the first frame update
     void Start() {
+        // Debug.Log("Give me the statsScript!");
         statsScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Stats>();
-        playerHealthSlider2D = GetComponent<Slider>();
-
-        playerHealthSlider2D.maxValue = statsScript.maxHealth;
+        // Debug.Log("Give the slider the correct max health!");
         playerHealthSlider3D.maxValue = statsScript.maxHealth;
-        //statsScript.health = statsScript.maxHealth;
+        // Debug.Log("Give the player his max health!");
+        statsScript.health = statsScript.maxHealth;
+        statsScript.mana = statsScript.maxMana;
     }
-
-    // Update is called once per frame
-    void Update() {
-        playerHealthSlider2D.value = statsScript.health;
-        playerHealthSlider3D.value = playerHealthSlider2D.value;
+        void Update() {
+        playerHealthSlider3D.value = statsScript.health;
     }
 }

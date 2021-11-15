@@ -6,20 +6,21 @@ using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour {
 
 
-    public Slider enemyHealthSlider3D;
-
+    Slider enemyHealthSlider;
     Stats statsScript;
 
     // Start is called before the first frame update
     void Start() {
-        statsScript = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Stats>();
-        enemyHealthSlider3D = GetComponent<Slider>();
-        enemyHealthSlider3D.maxValue = statsScript.maxHealth;
-        //statsScript.health = statsScript.maxHealth;
+        statsScript = GetComponent<Stats>();
+        statsScript.health = statsScript.maxHealth;
+        if (GameObject.FindGameObjectWithTag ("EnemyCanvas")) {
+            enemyHealthSlider = (Slider) FindObjectOfType(typeof (Slider));
+        }
+        enemyHealthSlider.maxValue = statsScript.maxHealth;
     }
 
     // Update is called once per frame
     void Update() {
-        enemyHealthSlider3D.value = statsScript.health;
+        enemyHealthSlider.value = statsScript.health;
     }
 }
