@@ -3,7 +3,12 @@ guid: b933dd45f9441904c9cd503a97a7ba1c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - enemyMinion: {fileID: 2407504190072959639, guid: 4b612347122a3ee49bb5ffd8536d5383, type: 3}
+  - enemyBombMinion: {fileID: 4863557458053685388, guid: f2a1afd8d3e7be648b4f477062277505, type: 3}
+  - gameTimer: {instanceID: 0}
+  - playerScore: {instanceID: 0}
+  - champion: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -3,7 +3,10 @@ guid: a6d795d4627a7604b8a1aec2527902df
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - prefabMysticShot: {fileID: 4644988837757361657, guid: 4522d16534143fe45912edd78a932793, type: 3}
+  - prefabEssenceFlux: {fileID: 209321439161541328, guid: d1b1b4733d13ec74996bb4b58a092ee0, type: 3}
+  - prefabArcaneBarrage: {fileID: 2677904856828535674, guid: bb0e22a2eb46d4744930126c1a56b2df, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

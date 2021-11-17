@@ -32,7 +32,6 @@ public class RangedAutoAttack : MonoBehaviour   {
             }
         }
     }
-
     public void enterDamageAndArmorPen(float damage, float armorPen)    {
         this.attackDamage = damage;
         this.armorPen = armorPen;

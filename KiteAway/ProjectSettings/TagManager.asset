@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - EnemyCanvas
   - MysticShot
+  - Boundary
+  - Wall
   layers:
   - Default
   - TransparentFX
