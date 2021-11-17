@@ -1,8 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GenericChampion : MonoBehaviour    {
+    [SerializeField] Image ability1;
+    [SerializeField] Image ability2;
+    [SerializeField] Image ability3;
+    [SerializeField] Image ability4;
     float currentLevel = 1;
     float abilityRankOne = 0;   // starts at 0, and at most can go to 5 in most cases
     float abilityRankTwo = 0;   // starts at 0, and at most can go to 5 in most cases
