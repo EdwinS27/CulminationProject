@@ -8,6 +8,13 @@ TagManager:
   - Enemy
   - EnemyCanvas
   - MysticShot
+  - Boundary
+  - Wall
+  - Abilities
+  - PlayerCanvas
+  - AutoAttack
+  - CausticSpittle
+  - LivingArtillery
   layers:
   - Default
   - TransparentFX

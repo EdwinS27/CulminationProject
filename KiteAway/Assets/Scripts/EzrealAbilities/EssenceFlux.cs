@@ -17,7 +17,7 @@ public class EssenceFlux : MonoBehaviour   {
 
         }
         if(startMovingToPreventCrash && bonusDamage == false){
-            transform.position = Vector3.MoveTowards(transform.position, TargetDestination, fluxWaveSpeed * Time.deltaTime);
+            transform.position -= TargetDestination * fluxWaveSpeed * Time.deltaTime;
             if(startCoroutineDestroy == false)  {
                 StartCoroutine(DestroyObject());
                 startCoroutineDestroy = true;
@@ -33,7 +33,7 @@ public class EssenceFlux : MonoBehaviour   {
         }
     }
     public void takesBonusDamage(float damage, float bonusDamage)  {
-        enemy.GetComponent<Stats>().health -= damage * bonusDamage;
+        //enemy.GetComponent<Stats>().health -= damage * bonusDamage;
     }
     // Setters & Getters for TargetDestination
     public Vector3 GetTargetDestination()  {

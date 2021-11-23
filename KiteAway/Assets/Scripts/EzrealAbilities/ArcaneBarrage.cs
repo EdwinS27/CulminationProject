@@ -3,44 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ArcaneBarrage : MonoBehaviour  {
-    float maxDistance;
-    Vector3 TargetDestination;
-    bool startMovingToPreventCrash = false;
-    bool startCoroutineDestroy = false;
+    float ap;
     float damage;
+    float bonusAD;
+    private GameObject sendsTheirRegards;
+    Vector3 TargetDestination;
     public float arcaneBarrageSpeed;
     void Update() {
-        if(startMovingToPreventCrash){
-            // transform.position = Vector3.MoveTowards(transform.position, TargetDestination, arcaneBarrageSpeed * Time.deltaTime);
-            transform.position -= TargetDestination * arcaneBarrageSpeed * Time.deltaTime;
-            if(startCoroutineDestroy == false)  {
-                StartCoroutine(DestroyObject());
-                startCoroutineDestroy = true;
-            }
-        }
-
+        // transform.position = Vector3.MoveTowards(transform.position, TargetDestination, arcaneBarrageSpeed * Time.deltaTime);
+        transform.position -= TargetDestination * arcaneBarrageSpeed * Time.deltaTime;
     }
     private void OnTriggerEnter(Collider collidedWith) {
         if(collidedWith.tag == "Enemy")    {
             GameObject.FindGameObjectWithTag("Player").GetComponent<Ezreal>().InteractWithStacks();
-            collidedWith.gameObject.GetComponent<Stats>().health -= damage;
-        }   
+            collidedWith.gameObject.GetComponent<Stats>().takeMixedDamage(this.sendsTheirRegards, this.damage, this.bonusAD, this.ap);
+        }
+        else if(collidedWith.tag == "Boundary")    {    Destroy(this.gameObject);   }
     }
 
     // Setters & Getters for TargetDestination
-    public Vector3 GetTargetDestination()  {
-        return TargetDestination;
-    }
-    public void SetTargetDestination(Vector3 targetLocation) {
-        TargetDestination = targetLocation;
-        startMovingToPreventCrash = true;
-    }
-    public void setMysticShotDamage(float damageInput)  {
-        damage = damageInput;
-    }
-    IEnumerator DestroyObject(){
-        yield return new WaitForSeconds(3);
-        // Do something
-        Destroy(this.gameObject);
+    public void gameObjectSentFrom(GameObject sentFrom) {   this.sendsTheirRegards = sentFrom;  }
+    public Vector3 GetTargetDestination()  {    return TargetDestination;   }
+    public void SetTargetDestination(Vector3 targetLocation) {  TargetDestination = targetLocation; }
+    public void SetArcaneBarrageDamage(float damageInput, float bonusAD, float ap)  {
+        this.damage = damageInput;
+        this.bonusAD = bonusAD;
+        this.ap = ap;
     }
 }

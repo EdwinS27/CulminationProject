@@ -1,49 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class Ezreal : GenericChampion {
-    // Scripts
-    Stats statsScript;
-    MysticShot prefabMysticShot;
-    EssenceFlux prefabEssenceFlux;
-    ArcaneBarrage prefabArcaneBarrage;
+    public GameObject offset;
+    [SerializeField]    GameObject prefabMysticShot;
+    [SerializeField]    GameObject prefabEssenceFlux;
+    [SerializeField]    GameObject prefabArcaneBarrage;
+    // Variables Excluse to Ezreal
     public float maxShiftRange;
-
-    // Variables for Ability One Base Damage and Base Cooldown and base Mana Cost
-    float[] baseAbilityOneManaCost = {28f, 45f, 70f, 95f, 120f};
-    float currentAbilityOneCost;
-    float[] baseAbilityOneCoolDown = {5.5f, 5.25f, 5f, 4.75f, 4.5f}; // Base Cooldown for Each Level Rank in the ability
-    float[] baseAbilityOneDamage = {20f, 45f, 75f, 95f, 120f}; // Base Damage for each Level Rank in the ability
-    float abilityTwoRank = 0;   // starts at 0, and at most can go to 5 in most cases
-    float currentAbilityCoolDownTwo = 0;
-    float[] baseAbilityTwoManaCost = {50f, 50f, 50f, 50f, 50f};
-    // Variables for Ability Two Base Damage and Base Cooldown
-    float[] baseAbilityTwoCoolDown = {12f, 12f, 12f, 12f, 12f}; // Base Cooldown for Each Level Rank in the ability baseAbilityTwoCoolDown
-    float[] baseAbilityTwoDamage = {80f, 135f, 190f, 245f, 300f}; // Base Damage for each Level Rank in the ability
-    float currentAbilityCoolDownThree = 0;
-    float abilityThreeRank = 0; // starts at 0, and at most can go to 5 in most cases
-    // Variables for Ability Three Base Damage and Base Cooldown
-    float[] baseAbilityThreeCoolDown = {28f, 25f, 22f, 19f, 16f}; // Base Cooldown for Each Level Rank in the ability baseAbilityTwoDamage
-    float[] baseAbilityThreeDamage = {80f, 130f, 180f, 230f, 280f}; // Base Damage for each Level Rank in the ability
-    float abilityFourRank = 0;  // starts at 0, and at most can go to 3 in most cases
-    
-    float currentAbilityCoolDownFour = 0;
-    // Variables for Ability Four Base Damage and Base Cooldown
-    float[] baseAbilityFourCoolDown = {120f, 120f, 120f}; // Base Cooldown for Each Level Rank in the ability baseAbilityTwoDamage
-    float[] baseAbilityFourDamage = {350f, 500f, 650f}; // Base Damage for each Level Rank in the ability
-    float currentAbilityOneDamage;
     // Variables for passive :
     int stacks = 0; // amount of stacks , limit is 5
     float stacksDuration; // duration of stack, interacts with Time.DeltaTime
     float bonusAttackSpeed;
     float originalAttackSpeed;
     Vector3 skillShotTargetLocation;
-    private void Start() {
-        statsScript = GetComponent<Stats>();
-    }
     void Update()   {
         passive();
+        checkXP();
     }
     void passive()  {
         if(stacksDuration > 0)   {
@@ -61,111 +32,96 @@ public class Ezreal : GenericChampion {
         if(stacksDuration < 0)
             bonusAttackSpeed = -1;
     }
-
-    public float getStacks()    {
-        return this.stacks;
-    }
-
-    public float getStackDuration() {
-        return this.stacksDuration;
-    }
-
-    public void setStacks(int stacksIn)   {
-        this.stacks = stacksIn;
-    }
-
-    public void resetStackDuration()   {
-        this.stacksDuration = 6;
-    }
-    public Vector3 GetTargetLocation<Vector3>(Vector3 param)
-    {
-        return param;
-    }
+    public float getStacks()    {   return this.stacks; }
+    public float getStackDuration() {   return this.stacksDuration;    }
+    public void setStacks(int stacksIn)   { this.stacks = stacksIn;  }
+    public void resetStackDuration()   {    this.stacksDuration = 6;    }
+    public Vector3 GetTargetLocation<Vector3>(Vector3 param)    {   return param;   }
     public void InteractWithStacks() {
         if(stacks == 0) {
             originalAttackSpeed = statsScript.GetAttackSpeed();
             stacks++;
         }
-        else if(stacks < 5) {
+        else if(stacks < 5)
             stacks++;
-        }
-        else{
+        else
             stacks = 5;
-        }
         // after we check these conditions
         bonusAttackSpeed = originalAttackSpeed * stacks;
         statsScript.SetAttackSpeed(bonusAttackSpeed);
-        Debug.Log("Original Attack Speed: " + originalAttackSpeed + "\t" + "Bonus Attack Speed" + bonusAttackSpeed);
+        // Debug.Log("Original Attack Speed: " + originalAttackSpeed + "\t" + "Bonus Attack Speed" + bonusAttackSpeed);
     }
     // overrides the generic champion abilityOne
-    new public void useAbilityOne() {
-        if(statsScript.GetMana() - currentAbilityOneCost >= 0 && GetCurrentAbilityRankOne() > 0){
-            GetMousePositionForSkillShot(); // if we can use the ability then, and only then do we get the mouse position
-            SpawnMysticShot();
-        }
+    public override void UseAbility1() {
+        // Debug.Log("Ezreal used Ability 1");
+        statsScript.DeductMana(GetAbility1Cost());
+        GetMoUsePositionForSkillShot(); // if we can Use the ability then, and only then do we get the moUse position
+        SpawnMysticShot();
     }
     // overrides the generic champion abilityTwo
-    new public void useAbilityTwo() {
-        if(statsScript.GetMana() - currentAbilityOneCost >= 0 && GetCurrentAbilityRankTwo() > 0){
-            GetMousePositionForSkillShot(); // if we can use the ability then, and only then do we get the mouse position
+    public override void UseAbility2() {
+        if((statsScript.GetMana() - GetAbility2Cost() >= 0) && (GetAbility2Points() > -1)){
+            statsScript.DeductMana(GetAbility2Cost());
+            GetMoUsePositionForSkillShot(); // if we can Use the ability then, and only then do we get the moUse position
             SpawnEssenceFlux();
         }
     }
     // overrides the generic champion abilityTwo
-    public override void useAbilityThree() {
-        Debug.Log("You Can Use Ability Rank Three ");
-        if(statsScript.GetMana() - currentAbilityOneCost >= 0 && GetCurrentAbilityRankThree() > 0)  {
+    public override void UseAbility3() {
+        if(statsScript.GetMana() - GetAbility3Cost() >= 0 && GetAbility3Points() > -1)  {
+            statsScript.DeductMana(GetAbility3Cost());
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1000)) {
-                Debug.Log("Character position: " + transform.position + "\tE destination: " + hit.point);
+                // Debug.Log("Character position: " + transform.position + "\tE destination: " + hit.point);
                 float movedX = ChangeInXDuringShift(transform.position, hit.point);
                 float movedZ = ChangeInZDuringShift(transform.position, hit.point);
-                Debug.Log("Position of Player before shift: " + transform.position);
+                // Debug.Log("Position of Player before shift: " + transform.position);
                 Shift(movedX, movedZ);
-                Debug.Log("Position of Player after shift: " + transform.position);
+                // Debug.Log("Position of Player after shift: " + transform.position);
             }
         }
     }
     // overrides the generic champion abilityTwo
-    new public void useAbilityFour() {
-        if(statsScript.GetMana() - currentAbilityOneCost >= 0 && GetCurrentAbilityRankFour() > 0){
-            GetMousePositionForSkillShot(); // if we can use the ability then, and only then do we get the mouse position
+    public override void UseAbility4() {
+        if( (statsScript.GetMana() - GetAbility4Cost() >= 0) && (GetAbility4Points() > -1) ){
+            statsScript.DeductMana(GetAbility4Cost());
+            GetMoUsePositionForSkillShot(); // if we can Use the ability then, and only then do we get the moUse position
             SpawnArcaneBarrage();
         }
     }
     public void SpawnMysticShot() {
-        // useSkillShot = true;
-        var createdMysticShot = Instantiate(prefabMysticShot, transform.position, transform.rotation);
+        // UseSkillShot = true;
+        var createdMysticShot = Instantiate(prefabMysticShot, offset.transform.position, transform.rotation);
+        // Debug.Log(createdMysticShot);
         createdMysticShot.transform.rotation.SetLookRotation(transform.position);
-        createdMysticShot.GetComponent<MysticShot>().SetTargetDestination(skillShotTargetLocation);
+        createdMysticShot.GetComponent<MysticShot>().setGameObjectSentFrom(this.gameObject);
+        createdMysticShot.GetComponent<MysticShot>().setMissileSpeed(getMissileSpeed());
+        createdMysticShot.GetComponent<MysticShot>().setTargetDestination(skillShotTargetLocation);
         // formula for bonus mystic shot damage is: bonus = abilityDamage + (totalAttackDamage * 130% or 1.3) + (15 % totalAbilityDamage)
-        float bonusMysticShotDamage = currentAbilityOneDamage + (statsScript.attackDamage * 1.3f) + (statsScript.abilityDamage * .15f);
-        createdMysticShot.GetComponent<MysticShot>().setMysticShotDamage(bonusMysticShotDamage, statsScript.armorPen, statsScript.magicPen);
+        float totalDamage = GetAbility1Damage() + (statsScript.GetAttackDamage() * 1.3f) + (statsScript.GetAbilityDamage() * .15f);
+        createdMysticShot.GetComponent<MysticShot>().setMysticShotDamage(totalDamage, statsScript.GetArmorPen());
     }
     public void SpawnEssenceFlux()  {
-        // useSkillShot = true;
-        var createdEssenceFlux = Instantiate(prefabEssenceFlux, transform.position, transform.rotation);
+        // UseSkillShot = true;
+        var createdEssenceFlux = Instantiate(prefabEssenceFlux, offset.transform.position, transform.rotation);
         createdEssenceFlux.GetComponent<EssenceFlux>().SetTargetDestination(skillShotTargetLocation);
     }
     public void SpawnArcaneBarrage()  {
-        // useSkillShot = true;
-        var createdArcaneBarrage = Instantiate(prefabArcaneBarrage, transform.position, transform.rotation);
+        // UseSkillShot = true;
+        var createdArcaneBarrage = Instantiate(prefabArcaneBarrage, offset.transform.position, transform.rotation);
         createdArcaneBarrage.GetComponent<ArcaneBarrage>().SetTargetDestination(skillShotTargetLocation);
+        createdArcaneBarrage.GetComponent<MysticShot>().setGameObjectSentFrom(this.gameObject);
+        createdArcaneBarrage.GetComponent<ArcaneBarrage>().SetArcaneBarrageDamage(GetAbility4Damage(), statsScript.GetBonusAttackDamage(), statsScript.GetAbilityDamage());
     }
-    public void onLevelUp() {
-        currentAbilityOneDamage = 1;
-    }
-    void GetMousePositionForSkillShot() {
+    void GetMoUsePositionForSkillShot() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 1000)) {
             skillShotTargetLocation = (transform.position - hit.point).normalized;
         }
     }
-    // Update is called once per frame
-    
-    // Does the actual change itself.
+    // Does the actual change in movement.
     void Shift(float changeInX, float changeInZ)    {
         // In shift I need to ask a function to determine if we are adding or subtracting to our transform.position
         // two parameters I will need are, changeInX and changeInZ
