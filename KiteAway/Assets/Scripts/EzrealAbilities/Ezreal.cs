@@ -1,5 +1,6 @@
 using UnityEngine;
 public class Ezreal : GenericChampion {
+    private Animator _anim;
     public GameObject offset;
     [SerializeField]    GameObject prefabMysticShot;
     [SerializeField]    GameObject prefabEssenceFlux;
@@ -12,6 +13,9 @@ public class Ezreal : GenericChampion {
     float bonusAttackSpeed;
     float originalAttackSpeed;
     Vector3 skillShotTargetLocation;
+    private void Start() {
+        _anim = GetComponent<Animator>();
+    }
     void Update()   {
         passive();
         checkXP();
@@ -47,16 +51,25 @@ public class Ezreal : GenericChampion {
         else
             stacks = 5;
         // after we check these conditions
-        bonusAttackSpeed = originalAttackSpeed * stacks;
+        float s = stacks * .1f;
+        Debug.Log("float " + s);
+        var n = s + originalAttackSpeed;
+        Debug.Log(n);
+        bonusAttackSpeed = originalAttackSpeed + n;
         statsScript.SetAttackSpeed(bonusAttackSpeed);
+        
+        Debug.Log("Original Attack Speed: " + originalAttackSpeed + "\tStacks: " + stacks + "\tNew Attack Speed: " + bonusAttackSpeed);
         // Debug.Log("Original Attack Speed: " + originalAttackSpeed + "\t" + "Bonus Attack Speed" + bonusAttackSpeed);
+        resetStackDuration();
     }
     // overrides the generic champion abilityOne
     public override void UseAbility1() {
+        _anim.SetBool("Basic Attack", true);
         // Debug.Log("Ezreal used Ability 1");
         statsScript.DeductMana(GetAbility1Cost());
         GetMoUsePositionForSkillShot(); // if we can Use the ability then, and only then do we get the moUse position
         SpawnMysticShot();
+        // _anim.SetBool("Basic Attack", false);
     }
     // overrides the generic champion abilityTwo
     public override void UseAbility2() {
@@ -94,7 +107,7 @@ public class Ezreal : GenericChampion {
         // UseSkillShot = true;
         var createdMysticShot = Instantiate(prefabMysticShot, offset.transform.position, transform.rotation);
         // Debug.Log(createdMysticShot);
-        createdMysticShot.transform.rotation.SetLookRotation(transform.position);
+        createdMysticShot.transform.rotation.SetLookRotation(skillShotTargetLocation);
         createdMysticShot.GetComponent<MysticShot>().setGameObjectSentFrom(this.gameObject);
         createdMysticShot.GetComponent<MysticShot>().setMissileSpeed(getMissileSpeed());
         createdMysticShot.GetComponent<MysticShot>().setTargetDestination(skillShotTargetLocation);

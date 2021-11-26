@@ -45,7 +45,7 @@ public class RangedAutoAttack : MonoBehaviour   {
         dealMixedDamage = true;
     }
     private void OnTriggerEnter(Collider collidedWith) {
-        Debug.Log("Has entered trigger");
+        // Debug.Log("Has entered trigger");
         if(GameObject.ReferenceEquals(collidedWith.gameObject, this.target)){
             decideDamage();
             Destroy(this.gameObject);

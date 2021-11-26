@@ -14,7 +14,7 @@ public class InputTargeting : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1000)) {
-                if(hit.collider.GetComponent<Targetable>() != null || hit.collider.GetComponent<Targetable>().GetEnemyType() != Targetable.EnemyType.CHARACTER) {
+                if(hit.collider.GetComponent<Targetable>() != null ) {
                     if(hit.collider.GetComponent<Targetable>().GetEnemyType() == Targetable.EnemyType.MINION) {
                         selectedHero.GetComponent<HeroCombat>().setTargetedEnemy(hit.collider.gameObject); // targeting the enemy
                     }

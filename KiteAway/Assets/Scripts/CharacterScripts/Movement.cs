@@ -62,7 +62,8 @@ public class Movement : MonoBehaviour {
         walking = true;
         distanceToStop = stoppingDistance;
     }
-    public void StopMovement()  { walking = false;  }
+    public bool GetWalking(){   return this.walking;}
+    public void StopMovement()  { walking = false;}
 }
 
 /*

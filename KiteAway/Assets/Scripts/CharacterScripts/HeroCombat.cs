@@ -7,22 +7,24 @@ public class HeroCombat : MonoBehaviour {
     public HeroAttackType heroAttackType;
     public GameObject offset;
     private bool isHeroAlive;
-    public bool basicAtttackIdle = false;
-    public float rotateSpeedForAttack;
+    private bool basicAtttackIdle = false;
+    private float rotateSpeedForAttack;
     float attackRange;
     private GameObject targetedEnemy;
     [SerializeField]
     private GameObject _projectileAuto;
     public bool canPerformRangedAttack = true;
     private Movement moveScript;
-    public bool performMeleeAttack = false;
+    private bool performMeleeAttack = false;
     private Stats statScript;
+    private Animator _anim;
     // Start is called before the first frame update
     void Start() {
         moveScript = GetComponent<Movement>();
         statScript = GetComponent<Stats>();
         attackRange = statScript.GetAttackRange();
-        // Debug.Log(attackRange);
+        _anim = GetComponent<Animator>();
+        Debug.Log(_anim);
     }
     // Update is called once per frame
     void Update() {
@@ -76,13 +78,13 @@ public class HeroCombat : MonoBehaviour {
     public GameObject getTargetedEnemy() {    return this.targetedEnemy;}
     IEnumerator RangedAttackInterval() {
         canPerformRangedAttack = false;
-        //anim.setBool("Basic Attack", true);
         float newAttackTime =  statScript.GetAttackTime() - statScript.GetAttackSpeed(); // statScript.GetAttackTime() / (100 + statScript.GetAttackSpeed()) * .01f
-        //Debug.Log("canPerformRangedAttack: " + canPerformRangedAttack + "\tnewAttackTime" + newAttackTime);
+        Debug.Log("newAttackTime" + newAttackTime);
         if(targetedEnemy != null)   {
             // Debug.Log("Ranged Auto Attack method called");
             RangedAttack();
-            //anim.setBool("Basic Attack", false);
+            Debug.Log(_anim.GetBool("Basic Attack"));
+            _anim.SetBool("Basic Attack", false);
             // canPerformRangedAttack = true;
         }
         yield return new WaitForSeconds(newAttackTime); // wait until we can attack again
@@ -93,6 +95,8 @@ public class HeroCombat : MonoBehaviour {
         if(targetedEnemy != null) {
             if (targetedEnemy.GetComponent<Targetable>().GetEnemyType() == Targetable.EnemyType.MINION) {
                 // Debug.Log("Player has targeted an enemy HeroCombatScript!");
+                _anim.SetBool("Basic Attack", true);
+                Debug.Log(_anim.GetBool("Basic Attack"));
                 SpawnRangedProjectile("Minion", targetedEnemy);
             }
         }
