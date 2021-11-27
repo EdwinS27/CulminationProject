@@ -25,10 +25,7 @@ public class GameManager : MonoBehaviour    {
     private int intensity = 1;
     public Text gameTimer; // Format: 00 minutes : 00 seconds
     public Text playerScore; // Format : Kills / Deaths
-    GenericChampion champion;
-    void Start() {
-        champion = GameObject.FindGameObjectWithTag("Player").GetComponent<GenericChampion>();
-    }
+    public GenericChampion champion;
     void EnemySpawner(){
         if (timeUntilSpawnMinions > 0)
             timeUntilSpawnMinions -= Time.deltaTime;

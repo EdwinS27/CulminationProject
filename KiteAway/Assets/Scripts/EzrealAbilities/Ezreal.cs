@@ -14,6 +14,7 @@ public class Ezreal : GenericChampion {
     float originalAttackSpeed;
     Vector3 skillShotTargetLocation;
     private void Start() {
+        statsScript = GetComponent<Stats>();
         _anim = GetComponent<Animator>();
     }
     void Update()   {
@@ -52,30 +53,31 @@ public class Ezreal : GenericChampion {
             stacks = 5;
         // after we check these conditions
         float s = stacks * .1f;
-        Debug.Log("float " + s);
+        // Debug.Log("float " + s);
         var n = s + originalAttackSpeed;
-        Debug.Log(n);
+        // Debug.Log(n);
         bonusAttackSpeed = originalAttackSpeed + n;
         statsScript.SetAttackSpeed(bonusAttackSpeed);
         
-        Debug.Log("Original Attack Speed: " + originalAttackSpeed + "\tStacks: " + stacks + "\tNew Attack Speed: " + bonusAttackSpeed);
+        // Debug.Log("Original Attack Speed: " + originalAttackSpeed + "\tStacks: " + stacks + "\tNew Attack Speed: " + bonusAttackSpeed);
         // Debug.Log("Original Attack Speed: " + originalAttackSpeed + "\t" + "Bonus Attack Speed" + bonusAttackSpeed);
         resetStackDuration();
     }
     // overrides the generic champion abilityOne
     public override void UseAbility1() {
-        _anim.SetBool("Basic Attack", true);
-        // Debug.Log("Ezreal used Ability 1");
+        GetMousePositionForSkillShot(); // if we can Use the ability then, and only then do we get the moUse position
+        _anim.SetBool("ShootAbility", true);
+        Debug.Log("ShootAbility: " + _anim.GetBool("ShootAbility"));
         statsScript.DeductMana(GetAbility1Cost());
-        GetMoUsePositionForSkillShot(); // if we can Use the ability then, and only then do we get the moUse position
         SpawnMysticShot();
         // _anim.SetBool("Basic Attack", false);
+        _anim.SetBool("ShootAbility", false);
     }
     // overrides the generic champion abilityTwo
     public override void UseAbility2() {
         if((statsScript.GetMana() - GetAbility2Cost() >= 0) && (GetAbility2Points() > -1)){
             statsScript.DeductMana(GetAbility2Cost());
-            GetMoUsePositionForSkillShot(); // if we can Use the ability then, and only then do we get the moUse position
+            GetMousePositionForSkillShot(); // if we can Use the ability then, and only then do we get the moUse position
             SpawnEssenceFlux();
         }
     }
@@ -99,7 +101,7 @@ public class Ezreal : GenericChampion {
     public override void UseAbility4() {
         if( (statsScript.GetMana() - GetAbility4Cost() >= 0) && (GetAbility4Points() > -1) ){
             statsScript.DeductMana(GetAbility4Cost());
-            GetMoUsePositionForSkillShot(); // if we can Use the ability then, and only then do we get the moUse position
+            GetMousePositionForSkillShot(); // if we can Use the ability then, and only then do we get the moUse position
             SpawnArcaneBarrage();
         }
     }
@@ -127,7 +129,7 @@ public class Ezreal : GenericChampion {
         createdArcaneBarrage.GetComponent<MysticShot>().setGameObjectSentFrom(this.gameObject);
         createdArcaneBarrage.GetComponent<ArcaneBarrage>().SetArcaneBarrageDamage(GetAbility4Damage(), statsScript.GetBonusAttackDamage(), statsScript.GetAbilityDamage());
     }
-    void GetMoUsePositionForSkillShot() {
+    void GetMousePositionForSkillShot() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 1000)) {

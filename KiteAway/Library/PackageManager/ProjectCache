@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637729377310278962
+      ticks: 637735528505412499
     m_Hash: 2871828476
   m_LockFileStatus:
     m_FilePath: C:/Users/edwin/Documents/CulminationProject/KiteAway/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637729377310559026
+      ticks: 637735528505532708
     m_Hash: 1234591311
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}

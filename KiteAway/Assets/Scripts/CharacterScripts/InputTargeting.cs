@@ -24,6 +24,7 @@ public class InputTargeting : MonoBehaviour {
                     if(hit.collider.gameObject.tag == "Ground")  {
                         targetDestination = hit.point;
                         selectedHero.GetComponent<Movement>().SetMovementFromInputTarget(targetDestination);
+                        selectedHero.GetComponent<Movement>().FaceTarget(targetDestination);
                     }
                 }
             } // end if physics

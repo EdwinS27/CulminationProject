@@ -6,6 +6,7 @@ public class MysticShot : SkillShots {
     private float damage;
     private float armorPen;
     new private void HitSomething() {
+        decideDamage();
         shotsConnectedIncrement();
         GameObject ezreal = getSender();
         ezreal.GetComponent<Ezreal>().InteractWithStacks();
@@ -20,6 +21,7 @@ public class MysticShot : SkillShots {
         if(collidedWith.tag == "Enemy")    {
             targetHit = collidedWith.gameObject;
             HitSomething();
+            Debug.Log("targetHit: " + targetHit);
             Destroy(this.gameObject); // IF WE HIT SOMETHING DESTROY SELF AFTER
         }   
     }

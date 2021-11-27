@@ -24,7 +24,7 @@ public class HeroCombat : MonoBehaviour {
         statScript = GetComponent<Stats>();
         attackRange = statScript.GetAttackRange();
         _anim = GetComponent<Animator>();
-        Debug.Log(_anim);
+        // Debug.Log(_anim);
     }
     // Update is called once per frame
     void Update() {
@@ -78,38 +78,39 @@ public class HeroCombat : MonoBehaviour {
     public GameObject getTargetedEnemy() {    return this.targetedEnemy;}
     IEnumerator RangedAttackInterval() {
         canPerformRangedAttack = false;
+        _anim.SetBool("Basic Attack", true);
         float newAttackTime =  statScript.GetAttackTime() - statScript.GetAttackSpeed(); // statScript.GetAttackTime() / (100 + statScript.GetAttackSpeed()) * .01f
-        Debug.Log("newAttackTime" + newAttackTime);
-        if(targetedEnemy != null)   {
-            // Debug.Log("Ranged Auto Attack method called");
-            RangedAttack();
-            Debug.Log(_anim.GetBool("Basic Attack"));
-            _anim.SetBool("Basic Attack", false);
-            // canPerformRangedAttack = true;
-        }
+        // Debug.Log("newAttackTime" + newAttackTime);
         yield return new WaitForSeconds(newAttackTime); // wait until we can attack again
-        canPerformRangedAttack = true;
+        if(targetedEnemy == null)   {
+            // Debug.Log("Ranged Auto Attack method called");
+            // Debug.Log(_anim.GetBool("Basic Attack"));
+            // Debug.Log(_anim.GetBool("Basic Attack"));
+            _anim.SetBool("Basic Attack", false);
+            canPerformRangedAttack = true;
+        }
     }
     public void RangedAttack() {
         // Debug.Log("Targeted Enemy: " + targetedEnemy);
         if(targetedEnemy != null) {
             if (targetedEnemy.GetComponent<Targetable>().GetEnemyType() == Targetable.EnemyType.MINION) {
+                moveScript.FaceTarget(targetedEnemy.transform.position);
                 // Debug.Log("Player has targeted an enemy HeroCombatScript!");
-                _anim.SetBool("Basic Attack", true);
-                Debug.Log(_anim.GetBool("Basic Attack"));
+                // Debug.Log(_anim.GetBool("Basic Attack"));
                 SpawnRangedProjectile("Minion", targetedEnemy);
             }
         }
     }
 
     void SpawnRangedProjectile(string typeOfEnemy, GameObject targetedEnemyObj) {
-        float damage = statScript.GetAttackDamage();
-        float armorPen = statScript.GetArmorPen();
-        GameObject auto = Instantiate(_projectileAuto, offset.transform.position, Quaternion.identity);
-        if(typeOfEnemy == "Minion") {
+        if (typeOfEnemy == "Minion") {
             // Debug.Log("Type of Enemy is Minion");
+            float damage = statScript.GetAttackDamage();
+            float armorPen = statScript.GetArmorPen();
+            GameObject auto = Instantiate(_projectileAuto, offset.transform.position, Quaternion.identity);
             auto.GetComponent<RangedAutoAttack>().SetTarget(this.gameObject, targetedEnemy, true, "Minion", damage, armorPen);
             //auto.GetComponent<RangedAutoAttack>().SetTarget(targetedEnemy, true, "Minion", damage, armorPen);
         }
+        _anim.SetBool("Basic Attack", false);
     }
 }

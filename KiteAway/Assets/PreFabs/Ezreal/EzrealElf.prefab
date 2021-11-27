@@ -1984,7 +1984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3777438748254994145}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 1, z: 0.5}
+  m_LocalPosition: {x: 0, y: 1, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5235060474909740104}
@@ -2357,7 +2357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroAttackType: 1
   offset: {fileID: 3777438748254994145}
-  _projectileAuto: {fileID: 7924817222374519750, guid: 32cdb55abf313254e8a86a3cfe53a2e4, type: 3}
+  _projectileAuto: {fileID: 8657249585725567287, guid: 696ac0a8578db404ea5618bd4cf6a0e3, type: 3}
   canPerformRangedAttack: 1
 --- !u!114 &6710868738580362623
 MonoBehaviour:

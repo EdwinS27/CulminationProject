@@ -166,6 +166,5 @@ public class GenericChampion : MonoBehaviour    {
     public Sprite GetAbilityImage2() {   return abilityImage2;}
     public Sprite GetAbilityImage3() {   return abilityImage3;}
     public Sprite GetAbilityImage4() {   return abilityImage4;}
-    private void Start() {  statsScript = GetComponent<Stats>();    }
     public T GenericMethod<T>(T param)  {   return param;}
 }

@@ -1,12 +1,14 @@
 using UnityEngine;
 public class CharAnimator : MonoBehaviour   {
     Animator _anim;
+    Stats statsScript;
     Movement moveScript;
     float speed;
     float motionSmoothTime = .1f;
     void Start()    {
-        moveScript =GetComponent<Movement>();
         _anim = GetComponent<Animator>();
+        statsScript = GetComponent<Stats>();
+        moveScript = GetComponent<Movement>();
     }
     void Update()   {
         movementAnimation();

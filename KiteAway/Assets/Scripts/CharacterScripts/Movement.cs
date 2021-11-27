@@ -64,6 +64,14 @@ public class Movement : MonoBehaviour {
     }
     public bool GetWalking(){   return this.walking;}
     public void StopMovement()  { walking = false;}
+    public void FaceTarget(Vector3 target)    {
+        lookAtTarget = new Vector3(
+            target.x - transform.position.x,
+            0,
+            target.z - transform.position.z
+        );
+        charRotation = Quaternion.LookRotation(lookAtTarget);
+    }
 }
 
 /*
