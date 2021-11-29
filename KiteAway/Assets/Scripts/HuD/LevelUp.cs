@@ -10,7 +10,7 @@ public class LevelUp : MonoBehaviour    {
     public GameObject levelR;
     void Start()    {
         champion = GameObject.FindGameObjectWithTag("Player").GetComponent<GenericChampion>();
-        levelR.SetActive(false);
+        // levelR.SetActive(false);
     }
     public void Update()    {
         if(champion.GetCanLevelUp())     LevelUpSkill();

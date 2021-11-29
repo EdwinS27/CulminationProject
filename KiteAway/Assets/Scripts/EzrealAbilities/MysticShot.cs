@@ -21,7 +21,7 @@ public class MysticShot : SkillShots {
         if(collidedWith.tag == "Enemy")    {
             targetHit = collidedWith.gameObject;
             HitSomething();
-            Debug.Log("targetHit: " + targetHit);
+            // Debug.Log("targetHit: " + targetHit);
             Destroy(this.gameObject); // IF WE HIT SOMETHING DESTROY SELF AFTER
         }   
     }

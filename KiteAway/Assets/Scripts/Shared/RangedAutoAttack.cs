@@ -22,24 +22,23 @@ public class RangedAutoAttack : MonoBehaviour   {
         }
     }
     private void decideDamage() {
-        if(armorPen > 0)    {
-            // do advanced basic damage
-            target.GetComponent<Stats>().takeBasicDamage(this.sentFrom, this.attackDamage, this.armorPen);
+        if(!dealMixedDamage){
+            if(armorPen > 0)    target.GetComponent<Stats>().takeBasicDamage(this.sentFrom, this.attackDamage, this.armorPen);
+            else    target.GetComponent<Stats>().takeBasicDamage(this.sentFrom, this.attackDamage);
         }
         else{
-            // Debug.Log("No armor");
-            target.GetComponent<Stats>().takeBasicDamage(this.sentFrom, this.attackDamage);
+            // we will do the deal mixed damage here
         }
     }
     // add missile speed
-    public void SetTarget(GameObject sentFrom, GameObject targetTransferedFromHeroCombat, bool boolIn, string targetType, float damage, float armorPen){
+    public void SetTarget(GameObject sentFrom, GameObject targetTransferedFromHeroCombat, bool boolIn, string targetType, float damage, float armorPen, float missileSpeed){
         this.sentFrom = sentFrom;
         this.targetSet = boolIn;
         this.target = targetTransferedFromHeroCombat;
         this.targetType = targetType;
         this.armorPen = armorPen;
         this.attackDamage = damage;
-        // this.missileSpeed = missileSpeed;
+        this.missileSpeed = missileSpeed;
     }
     public void SetTargetSpecialDamage()    {
         dealMixedDamage = true;

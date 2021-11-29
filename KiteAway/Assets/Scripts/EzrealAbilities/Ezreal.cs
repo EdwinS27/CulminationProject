@@ -67,7 +67,7 @@ public class Ezreal : GenericChampion {
     public override void UseAbility1() {
         GetMousePositionForSkillShot(); // if we can Use the ability then, and only then do we get the moUse position
         _anim.SetBool("ShootAbility", true);
-        Debug.Log("ShootAbility: " + _anim.GetBool("ShootAbility"));
+        // Debug.Log("ShootAbility: " + _anim.GetBool("ShootAbility"));
         statsScript.DeductMana(GetAbility1Cost());
         SpawnMysticShot();
         // _anim.SetBool("Basic Attack", false);

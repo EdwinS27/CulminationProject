@@ -22,6 +22,11 @@ public class Kogmaw : GenericChampion {
     private float originalAttackRange;
     private float newAttackRange; // needed for attack range increase
     Vector3 skillShotTargetLocation;
+    private Animator _anim;
+    private void Start() {
+        statsScript = GetComponent<Stats>();
+        _anim = GetComponent<Animator>();
+    }
     void Update()   {
         if(activateAttackRangeIncrease){
             if(timer > 0)

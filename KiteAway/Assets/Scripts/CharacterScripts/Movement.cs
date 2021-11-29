@@ -21,12 +21,12 @@ public class Movement : MonoBehaviour {
         if (walking)    Move();
     }
     void Move() {
+        Vector3 adjustedtargetdestination = new Vector3(targetDestination.x, transform.position.y, targetDestination.z);
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
             charRotation,
             statsScript.GetRotationSpeed() * Time.deltaTime
         );
-        Vector3 adjustedtargetdestination = new Vector3(targetDestination.x, transform.position.y, targetDestination.z);
         transform.position = Vector3.MoveTowards(
             transform.position,
             adjustedtargetdestination,
@@ -50,8 +50,19 @@ public class Movement : MonoBehaviour {
         walking = true;
         distanceToStop = 0.01f;
     }
-    // This would be based on attack range
     public void SetMovementFromInputTarget(Vector3 target, float stoppingDistance)    {
+        lookAtTarget = new Vector3(
+            target.x - transform.position.x,
+            0,
+            target.z - transform.position.z
+        );
+        charRotation = Quaternion.LookRotation(lookAtTarget);
+        targetDestination = target;
+        walking = true;
+        distanceToStop = stoppingDistance;
+    }
+    // This would be based on attack range
+    public void SetMovementFromHeroCombat(Vector3 target, float stoppingDistance)    {
         lookAtTarget = new Vector3(
             target.x - transform.position.x,
             0,

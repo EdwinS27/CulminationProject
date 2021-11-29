@@ -26,6 +26,12 @@ public class GameManager : MonoBehaviour    {
     public Text gameTimer; // Format: 00 minutes : 00 seconds
     public Text playerScore; // Format : Kills / Deaths
     public GenericChampion champion;
+    private void Start() {
+        Vector3 startlocation = new Vector3(0, 1, 0);
+        // create the selected character for this one
+        // var createChampion = Instantiate(selectedHero, startlocation, Quaternion.identity);
+        // champion = createChampion.GetComponent<GenericChampion>();
+    }
     void EnemySpawner(){
         if (timeUntilSpawnMinions > 0)
             timeUntilSpawnMinions -= Time.deltaTime;
@@ -41,6 +47,9 @@ public class GameManager : MonoBehaviour    {
         }
     }
     void Update()   {
+        if(champion == null){
+            champion = GameObject.FindGameObjectWithTag("Player").GetComponent<GenericChampion>();
+        }
         monitorChampionResource();
         EnemySpawner();
         incrementTime();

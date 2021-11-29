@@ -7,7 +7,6 @@ public class HeroCombat : MonoBehaviour {
     public HeroAttackType heroAttackType;
     public GameObject offset;
     private bool isHeroAlive;
-    private bool basicAtttackIdle = false;
     private float rotateSpeedForAttack;
     float attackRange;
     private GameObject targetedEnemy;
@@ -32,7 +31,8 @@ public class HeroCombat : MonoBehaviour {
             if(Vector3.Distance(transform.position, targetedEnemy.transform.position) > attackRange) {  // If the distance between the character and the enemy is greater than the character's attack range
                 // Debug.Log("The player is farther than the attack range: " + attackRange);
                 // Characters Target Destination is set here && Character Rotation
-                moveScript.SetMovementFromInputTarget(targetedEnemy.transform.position, attackRange);
+                moveScript.SetMovementFromHeroCombat(targetedEnemy.transform.position, attackRange);
+                // moveScript.FaceTarget();
             }
             else {
                 moveScript.StopMovement();
@@ -47,6 +47,7 @@ public class HeroCombat : MonoBehaviour {
                 // If the distance is not greater. Attack !
                 else if(heroAttackType == HeroAttackType.Ranged) {
                     if (canPerformRangedAttack) {
+                        // moveScript.FaceTarget();
                         StartCoroutine(RangedAttackInterval());
                         //Debug.Log("Attack the minion!");
                     }
@@ -57,14 +58,12 @@ public class HeroCombat : MonoBehaviour {
 
         }
     }
-
     IEnumerator MeleeAttackInterval() {
         performMeleeAttack = false;
         //anim.setBool("BasicAttack", false);
 
         yield return new WaitForSeconds(statScript.GetAttackTime() / (100 + statScript.GetAttackTime()) * .01f);
     }
-
     public void MeleeAttack() {
         performMeleeAttack = true;
         // anim.setBool("Basic Attack", true);
@@ -94,7 +93,6 @@ public class HeroCombat : MonoBehaviour {
         // Debug.Log("Targeted Enemy: " + targetedEnemy);
         if(targetedEnemy != null) {
             if (targetedEnemy.GetComponent<Targetable>().GetEnemyType() == Targetable.EnemyType.MINION) {
-                moveScript.FaceTarget(targetedEnemy.transform.position);
                 // Debug.Log("Player has targeted an enemy HeroCombatScript!");
                 // Debug.Log(_anim.GetBool("Basic Attack"));
                 SpawnRangedProjectile("Minion", targetedEnemy);
@@ -107,9 +105,10 @@ public class HeroCombat : MonoBehaviour {
             // Debug.Log("Type of Enemy is Minion");
             float damage = statScript.GetAttackDamage();
             float armorPen = statScript.GetArmorPen();
+            float missileSpeed = this.gameObject.GetComponent<GenericChampion>().getMissileSpeed();
             GameObject auto = Instantiate(_projectileAuto, offset.transform.position, Quaternion.identity);
-            auto.GetComponent<RangedAutoAttack>().SetTarget(this.gameObject, targetedEnemy, true, "Minion", damage, armorPen);
-            //auto.GetComponent<RangedAutoAttack>().SetTarget(targetedEnemy, true, "Minion", damage, armorPen);
+            // Debug.Log("The current champion: " + this.gameObject + "'s missile speed is: " + missileSpeed);
+            auto.GetComponent<RangedAutoAttack>().SetTarget(this.gameObject, targetedEnemy, true, "Minion", damage, armorPen, missileSpeed);
         }
         _anim.SetBool("Basic Attack", false);
     }

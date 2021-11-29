@@ -37,6 +37,9 @@ public class Abilities : MonoBehaviour {
         //skillShotIndicatorAbility1.GetComp1nt<Image>().enabled = false;
     }
     void Update() {
+        if(champion == null){
+            champion = GameObject.FindGameObjectWithTag("Player").GetComponent<GenericChampion>();
+        }
         AbilitiesCast();
         //Debug.Log("Q DURATION = " + durationAbility1); 
     }
