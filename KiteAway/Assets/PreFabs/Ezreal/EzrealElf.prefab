@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5928928151897212536}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: L_shield_container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2697280634331511357}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 L Toe0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4043849674866864149}
   - component: {fileID: 228301218236487110}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2345061447526275870}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1561762028654956725}
   - component: {fileID: 4529808473722725789}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9173888108118963409}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 R Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -307,7 +307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6146199946547398088}
   - component: {fileID: 3765133919502594300}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Body_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 3887462165242943912}
   - component: {fileID: 1467228660579709346}
   - component: {fileID: 4877227571683552166}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_weapon_bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5622548443239374391}
   - component: {fileID: 4761853429707958490}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_K
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -571,7 +571,7 @@ GameObject:
   - component: {fileID: 7518450036229042831}
   - component: {fileID: 7208792660841040113}
   - component: {fileID: 8027039328453571284}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Xtra_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -651,7 +651,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5489163604454947966}
   - component: {fileID: 3110017564092189964}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Shoulderpads_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -735,7 +735,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 857431611749031628}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 R UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -766,7 +766,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1820146199802894329}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 HeadNub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -796,7 +796,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2592228141542739897}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -832,7 +832,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6849945806991510520}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 R Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -864,7 +864,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5938555519704259727}
   - component: {fileID: 8660148449318753924}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_J
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -948,7 +948,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3380254515089093895}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 R Thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -981,7 +981,7 @@ GameObject:
   - component: {fileID: 980220229046441629}
   - component: {fileID: 9207218205772646212}
   - component: {fileID: 4781194898440753733}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_weapon_spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1060,7 +1060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4010920923735881612}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 R Toe0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1093,7 +1093,7 @@ GameObject:
   - component: {fileID: 1498166987046999172}
   - component: {fileID: 8578873837697225768}
   - component: {fileID: 3794442851496259790}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Xtra_quiver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1173,7 +1173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5933853601570519009}
   - component: {fileID: 8744130652396727770}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Shoulderpads_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1260,7 +1260,7 @@ GameObject:
   - component: {fileID: 3722391155587391408}
   - component: {fileID: 2176308574225688137}
   - component: {fileID: 6321969336458480325}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1359,7 +1359,7 @@ GameObject:
   - component: {fileID: 3864098761046176798}
   - component: {fileID: 5087523586629805669}
   - component: {fileID: 8224282182533369996}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: HPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1432,7 +1432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2900507643655920894}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bone_bag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1464,7 +1464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 434442236555997523}
   - component: {fileID: 978672752272943653}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_O
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1548,7 +1548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2288315177684813813}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 R Calf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1581,7 +1581,7 @@ GameObject:
   - component: {fileID: 8392014908588786180}
   - component: {fileID: 5234111063440117573}
   - component: {fileID: 2059244099368673709}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Xtra_bag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1660,7 +1660,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1756399150014091221}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 R Clavicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1692,7 +1692,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9140387101556638104}
   - component: {fileID: 7633178254562482037}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_I
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1776,7 +1776,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1491070140682041601}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 R Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1809,7 +1809,7 @@ GameObject:
   - component: {fileID: 7212091465443704352}
   - component: {fileID: 2821407822904324563}
   - component: {fileID: 4435530835760273060}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_shield_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1890,7 +1890,7 @@ GameObject:
   - component: {fileID: 7208109919770551220}
   - component: {fileID: 6295436770541224677}
   - component: {fileID: 8712801672639013727}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_weapon_staff_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1969,7 +1969,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8675307508349382663}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EzOffset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1999,7 +1999,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2680652197651801573}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: L_hand_container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2033,7 +2033,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5918925950521053755}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 Footsteps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2063,7 +2063,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4592500160914125591}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: R_hand_container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2101,7 +2101,7 @@ GameObject:
   - component: {fileID: 5119546019117801}
   - component: {fileID: 6762828459106165356}
   - component: {fileID: 2084841492658179852}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_weapon_sword_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2180,7 +2180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8319975104997345359}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 L Calf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2220,7 +2220,7 @@ GameObject:
   - component: {fileID: 3646503652682813473}
   - component: {fileID: -4869256768383018368}
   - component: {fileID: 1637075117951566441}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EzrealElf
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2319,15 +2319,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xpWorth: 0
-  rotationSpeed: 3
-  health: 0
+  rotationSpeed: 10
+  health: 1
   maxHealth: 530
   currentLevel: 1
   gold: 0
   moveSpeed: 8
   abilityDamage: 0
   cooldownReduction: 0
-  attackRange: 5.5
+  attackRange: 15
   attackSpeed: 0.625
   bonusAttackSpeed: 0
   attackTime: 1.8839
@@ -2467,7 +2467,7 @@ MonoBehaviour:
   offset: {fileID: 3777438748254994145}
   prefabMysticShot: {fileID: 4972547177537269756, guid: ad7c7d61440ab284c9798b11cd75bcf9, type: 3}
   prefabEssenceFlux: {fileID: 209321439161541328, guid: d1b1b4733d13ec74996bb4b58a092ee0, type: 3}
-  prefabArcaneBarrage: {fileID: 2677904856828535674, guid: bb0e22a2eb46d4744930126c1a56b2df, type: 3}
+  prefabArcaneBarrage: {fileID: 6245647245317769759, guid: bc99579d1f3facf4485584b7f4d4eb50, type: 3}
   maxShiftRange: 10
 --- !u!114 &3646503652682813473
 MonoBehaviour:
@@ -2517,7 +2517,7 @@ GameObject:
   - component: {fileID: 6919021625546068934}
   - component: {fileID: 7864015605477758075}
   - component: {fileID: 7674807425142783813}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_weapon_staff_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2596,7 +2596,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3796336508499116330}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 L Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2629,7 +2629,7 @@ GameObject:
   m_Component:
   - component: {fileID: 20226761315554998}
   - component: {fileID: 4912892239378562151}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Body_E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2728,7 +2728,7 @@ GameObject:
   - component: {fileID: 6204593461106394451}
   - component: {fileID: 5974251504890796010}
   - component: {fileID: 3812508589004014671}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2816,7 +2816,7 @@ GameObject:
   - component: {fileID: 4217028319372445157}
   - component: {fileID: 1244413926978512515}
   - component: {fileID: 192944661822217656}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_weapon_axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2895,7 +2895,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4990121190648013990}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Quiver_container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2926,7 +2926,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4662933344253685145}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bone_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2959,7 +2959,7 @@ GameObject:
   - component: {fileID: 2144812255550071755}
   - component: {fileID: 2186816913794425088}
   - component: {fileID: 1545408122386490401}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_weapon_staff_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3039,7 +3039,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3691391650636064702}
   - component: {fileID: 1955168582578000115}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3124,7 +3124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8777723056117325810}
   - component: {fileID: 798347380875635392}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Arms_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3212,7 +3212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7819174037437371112}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3244,7 +3244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7002103430219519691}
   - component: {fileID: 1130849661965800417}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_N
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3329,7 +3329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 453817081276683601}
   - component: {fileID: 2318354604157246239}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3413,7 +3413,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4386703520323857531}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 L Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3444,7 +3444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5905958014383868737}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3475,7 +3475,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 482881860067331415}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 L Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3506,7 +3506,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3438649057817837953}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 L Toe0Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3537,7 +3537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2024428317603666875}
   - component: {fileID: 2143301713989795314}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Body_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3633,7 +3633,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5032326567337245816}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 R Toe0Nub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3664,7 +3664,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5455933390994856073}
   - component: {fileID: 8408525128983838438}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Body_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3761,7 +3761,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8227727777503832496}
   - component: {fileID: 8793870232951998042}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Shoulderpads_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3846,7 +3846,7 @@ GameObject:
   m_Component:
   - component: {fileID: 981088648391604750}
   - component: {fileID: 4076788149541395929}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3932,7 +3932,7 @@ GameObject:
   - component: {fileID: 6008634382278967217}
   - component: {fileID: 9087805630006434704}
   - component: {fileID: 8672581433031657552}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_weapon_sword_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4012,7 +4012,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1637125264588759469}
   - component: {fileID: 7516009594790451339}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4097,7 +4097,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6933957330497110623}
   - component: {fileID: 6568389975113668803}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Legs_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4186,7 +4186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1553165598135297911}
   - component: {fileID: 5039784923161139740}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_P
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4271,7 +4271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5840019050835358244}
   - component: {fileID: 4492735644574608777}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Legs_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4360,7 +4360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4919626609603669008}
   - component: {fileID: 741167231774493848}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Arms_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4450,7 +4450,7 @@ GameObject:
   - component: {fileID: 6298074788125842292}
   - component: {fileID: 5158445221675887877}
   - component: {fileID: 6506136011563306557}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_shield_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4530,7 +4530,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2975350673903783151}
   - component: {fileID: 1654826340627694684}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Arms_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4620,7 +4620,7 @@ GameObject:
   - component: {fileID: 3019935379974053286}
   - component: {fileID: 990436739921285226}
   - component: {fileID: 5277781741237864427}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_weapon_hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4699,7 +4699,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5737589947649704525}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 L Thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4731,7 +4731,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3864476453477891978}
   - component: {fileID: 6432055584616658988}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4816,7 +4816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7683940955631911844}
   - component: {fileID: 6284390978796773503}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Legs_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4906,7 +4906,7 @@ GameObject:
   - component: {fileID: 6441583656165804541}
   - component: {fileID: 8639483180593064534}
   - component: {fileID: 3995603394685939052}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_weapon_dagger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4987,7 +4987,7 @@ GameObject:
   - component: {fileID: 1210678321019168847}
   - component: {fileID: 4221350843218784868}
   - component: {fileID: 1432636963263492825}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_shield_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5067,7 +5067,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1252164116822045239}
   - component: {fileID: 7805899052650579378}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_H
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5152,7 +5152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5097550603069796983}
   - component: {fileID: 4253609401051464958}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Body_F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5251,7 +5251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8101620358104616755}
   - component: {fileID: 572577609546008871}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5335,7 +5335,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2206640372658359063}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 L Clavicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5367,7 +5367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6746946158582687748}
   - component: {fileID: 8143534577151542215}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Body_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5463,7 +5463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3533847335949911229}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 Pelvis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5496,7 +5496,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7916061903063900163}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bip001 L UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5528,7 +5528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8385662329187416245}
   - component: {fileID: 7544812761458749715}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ELF_Units_Head_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}

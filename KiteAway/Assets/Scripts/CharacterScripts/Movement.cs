@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour {
-    private Vector3 charLocation;   // Location of the character
     private Vector3 targetDestination; // Destination
     private Vector3 lookAtTarget;    // Rotation of the character
     private Quaternion charRotation;
-    private float rotateVelocity;
     private float distanceToStop = 0.01f;
-    Stats statsScript;
-    HeroCombat heroCombatScript;
     bool walking = false;
+    bool characterIsAttacking = false;
+    private Stats statsScript;
+    private HeroCombat heroCombatScript;
     // Start is called before the first frame update
     void Start() {
         statsScript = GetComponent<Stats>();
@@ -20,20 +19,21 @@ public class Movement : MonoBehaviour {
     void Update() {
         if (walking)    Move();
     }
+    // fix rotation
     void Move() {
+        if(!characterIsAttacking){
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                charRotation,
+                statsScript.GetRotationSpeed() * Time.deltaTime
+            );
+        }
         Vector3 adjustedtargetdestination = new Vector3(targetDestination.x, transform.position.y, targetDestination.z);
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            charRotation,
-            statsScript.GetRotationSpeed() * Time.deltaTime
-        );
         transform.position = Vector3.MoveTowards(
             transform.position,
             adjustedtargetdestination,
             (statsScript.GetMoveSpeed() * Time.deltaTime));
-        // i need to be checking this when my character is moving
         if (Vector3.Distance(transform.position, adjustedtargetdestination) <= distanceToStop) {
-            // transform.position = adjustedtargetdestination;
             //Debug.Log("character has reached their destination and should stop moving!\nAlso resetting the value of distance to stop");
             distanceToStop = 0.01f;
             walking = false;
@@ -50,17 +50,6 @@ public class Movement : MonoBehaviour {
         walking = true;
         distanceToStop = 0.01f;
     }
-    public void SetMovementFromInputTarget(Vector3 target, float stoppingDistance)    {
-        lookAtTarget = new Vector3(
-            target.x - transform.position.x,
-            0,
-            target.z - transform.position.z
-        );
-        charRotation = Quaternion.LookRotation(lookAtTarget);
-        targetDestination = target;
-        walking = true;
-        distanceToStop = stoppingDistance;
-    }
     // This would be based on attack range
     public void SetMovementFromHeroCombat(Vector3 target, float stoppingDistance)    {
         lookAtTarget = new Vector3(
@@ -73,16 +62,40 @@ public class Movement : MonoBehaviour {
         walking = true;
         distanceToStop = stoppingDistance;
     }
-    public bool GetWalking(){   return this.walking;}
-    public void StopMovement()  { walking = false;}
-    public void FaceTarget(Vector3 target)    {
+    public void AdjustRotationToTarget(GameObject target){
+        lookAtTarget = new Vector3(
+            target.transform.position.x - transform.position.x,
+            0,
+            target.transform.position.z - transform.position.z
+        );
+        var angle = Vector3.Angle(lookAtTarget, transform.position);
+        if(angle > 1){
+            charRotation = Quaternion.LookRotation(lookAtTarget);
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                charRotation,
+                statsScript.GetRotationSpeed() * Time.deltaTime
+            );
+        }
+    }
+    public void AdjustRotationToTarget(Vector3 target){
         lookAtTarget = new Vector3(
             target.x - transform.position.x,
             0,
             target.z - transform.position.z
         );
         charRotation = Quaternion.LookRotation(lookAtTarget);
+        if(transform.rotation != charRotation){
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                charRotation,
+                statsScript.GetRotationSpeed() * Time.deltaTime
+            );
+        }
     }
+    public bool GetWalking(){   return this.walking;}
+    public void SetWalking(bool walk){   this.walking = walk;}
+    public bool GetAttacking(){ return this.characterIsAttacking;}
 }
 
 /*

@@ -1002,16 +1002,16 @@ MonoBehaviour:
   healthRegenGrowth: 0.55
   armorGrowth: 3.25
   magicResistGrowth: 0.5
-  missileSpeed: 0
+  missileSpeed: 2
   statsScript: {fileID: 0}
   abilityImage1: {fileID: 21300000, guid: 8d36c52b1191078488b81ae566b0d5f2, type: 3}
   abilityImage2: {fileID: 21300000, guid: 73be24575ff96b5458256646f9fab262, type: 3}
   abilityImage3: {fileID: 21300000, guid: 980b5501589f5334bb803be8def9f61f, type: 3}
   abilityImage4: {fileID: 21300000, guid: 899bbd341f8804f4b9216e7b1fea529a, type: 3}
   offset: {fileID: 7280985241255379693}
-  causticSpittle: {fileID: 1745611056446112119, guid: 963ce1d3975685c4fb4ee0764df708c5, type: 3}
-  voidOoze: {fileID: 0}
-  livingArtillery: {fileID: 3022998976680851471, guid: cf26f0d412990c14cbc24c036597dcb1, type: 3}
+  causticSpittle: {fileID: 596426939993478497, guid: 480f96d0a9d787a4d86ac64290e92092, type: 3}
+  voidOoze: {fileID: 8804336403198617377, guid: cfce07fa9392c3745ae3337522199725, type: 3}
+  livingArtillery: {fileID: 1368111256047199214, guid: 59e0689081d25494da89b78c36233810, type: 3}
 --- !u!114 &1112296057785659667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,7 +1037,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564e86df88bd1734c828b3478fd4f6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heroPlayer: 0
 --- !u!114 &8992125364255833539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,11 +1066,11 @@ MonoBehaviour:
   health: 0
   maxHealth: 565
   currentLevel: 1
-  gold: 0
+  goldWorth: 0
   moveSpeed: 8
   abilityDamage: 0
   cooldownReduction: 0
-  attackRange: 5
+  attackRange: 15
   attackSpeed: 0.665
   bonusAttackSpeed: 0
   attackTime: 1.6622
@@ -1102,7 +1101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroAttackType: 1
   offset: {fileID: 7280985241255379693}
-  _projectileAuto: {fileID: 100000, guid: e9fd768822e81b8428eef6c5f12fae5d, type: 3}
+  _projectileAuto: {fileID: 3000871854379929853, guid: 3334f61b437269e4a9d8bb4d35ab6daf, type: 3}
   canPerformRangedAttack: 1
 --- !u!114 &8965552918411278188
 MonoBehaviour:

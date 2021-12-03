@@ -14,6 +14,14 @@ public class SkillShots : MonoBehaviour {
     public void HitSomething() {
         shotsConnectedIncrement();
     }
+    public static void resetGame(){
+        shotsFired = 0;
+        shotsMissed = 0;
+        shotsConnected = 0;
+    }
+    public static int getShotsFired(){ return shotsFired;}
+    public static int getShotsMissed(){ return shotsMissed;}
+    public static int getShotsConnected(){ return shotsConnected;}
     public static void shotsFiredIncrement() {shotsFired++;}   // increment shotsFired
     public static void shotsConnectedIncrement() {shotsConnected++;}   // increment shots that connected with an enemy of any type
     public static void shotsMissedIncrement() {shotsMissed++;}

@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 7c31297673de34e40ad22f98292af7ec
+  - enabled: 1
+    path: Assets/Scenes/KiteAway.unity
+    guid: fd08910e154875347a45912494974705
+  - enabled: 1
+    path: Assets/Scenes/GameOverStats.unity
+    guid: 7d85dd1ea1d0d9a4ea62d321c054021e
   m_configObjects: {}

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraScroll : MonoBehaviour {
     public Camera mainCam;
     private float camFOV;
-    public float zoomSpeed;
+    private float zoomSpeed = 5f;
 
     private float mouseScrollInput;
 
@@ -18,8 +18,7 @@ public class CameraScroll : MonoBehaviour {
     void Update() {
         mouseScrollInput = Input.GetAxis("Mouse ScrollWheel");
         camFOV -= mouseScrollInput * zoomSpeed;
-        camFOV = Mathf.Clamp(camFOV, 15, 45);
-
+        camFOV = Mathf.Clamp(camFOV, 15, 30);
         mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, camFOV, zoomSpeed);
     }
 }

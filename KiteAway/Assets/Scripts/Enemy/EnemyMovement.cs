@@ -3,38 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour   {
-    GameObject playerCharacter;
+    public GameObject character;
     Vector3 playerCharactersLocation;
     Stats statsScript;
     bool moveToEnemy = false;
-    // Start is called before the first frame update
     void Start()    {
-        playerCharacter = GameObject.FindGameObjectWithTag("Player");
+        character = GameObject.FindGameObjectWithTag("Player");
         statsScript = GetComponent<Stats>();
     }
-    // Update is called once per frame
-    void Update()   {
-        if(moveToEnemy)
-            MoveTowardsEnemy();
-    }
-    // collider will go here, where it will be decided if I want it to be an instant kill, or a huge portion of damage.
-    private void OnTriggerEnter(Collider c) {
-        if(c.gameObject.tag == "Player")    {
-            Debug.Log("Do something: => Bomber");
+    void Update()   {   if(moveToEnemy) MoveTowardsEnemy();}
+    public void MoveTowardsEnemy(){
+        if(character != null){
+            playerCharactersLocation = character.GetComponent<Transform>().position;
+            transform.position = Vector3.MoveTowards(transform.position, playerCharactersLocation, statsScript.GetMoveSpeed() * Time.deltaTime);
+            var lookAtTarget = new Vector3(
+                playerCharactersLocation.x - transform.position.x,
+                0,
+                playerCharactersLocation.z - transform.position.z
+            );
+            var angle = Vector3.Angle(lookAtTarget, transform.position);
+            if(angle > 1){
+                // transform.rotation = Quaternion.LookRotation(playerCharactersLocation);
+                var charRotation = Quaternion.LookRotation(lookAtTarget);
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    charRotation,
+                    statsScript.GetRotationSpeed() * Time.deltaTime);
+            }
+        }
+        else{
+            if(GameObject.FindGameObjectWithTag("Player") == true){
+                character = GameObject.FindGameObjectWithTag("Player");
+            }
         }
     }
-    public void SetTargetEnemy(GameObject character){
-        this.playerCharacter = character;
-    }
-    public GameObject GetTargetedEnemy(){
-        return this.playerCharacter;
-    }
-    public void MoveTowardsEnemy(){
-        playerCharactersLocation = playerCharacter.GetComponent<Transform>().position;
-        transform.position = Vector3.MoveTowards(transform.position, playerCharactersLocation, statsScript.GetMoveSpeed() * Time.deltaTime);
-        transform.rotation = Quaternion.LookRotation(playerCharactersLocation);
-    }
-    public void SetMoveToEnemy(bool move){
-        this.moveToEnemy = move;
-    }
+    public GameObject GetTargetedEnemy(){return this.character;}
+    public void SetMoveToEnemy(bool move){  this.moveToEnemy = move;}
+    public void SetTargetEnemy(GameObject character){this.character = character;}
 }

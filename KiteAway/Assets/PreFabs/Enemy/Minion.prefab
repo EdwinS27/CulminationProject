@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8648901305739285264}
   - component: {fileID: -4537047208926177317}
   - component: {fileID: -867327110097127934}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Minion
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -124,10 +124,10 @@ MonoBehaviour:
   cooldownReduction: 0
   attackRange: 0
   attackSpeed: 1.25
+  bonusAttackSpeed: 0
   attackTime: 5
   attackDamage: 12
   bonusAttackDamage: 0
-  totalAttackDamage: 0
   criticalAttackDamage: 0
   mana: 0
   maxMana: 0
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 392571110919213857}
   - component: {fileID: 1318235689966249657}
   - component: {fileID: 4487461292277744695}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 9023180521285093123}
   - component: {fileID: 9182026809780100918}
   - component: {fileID: 283521762290176876}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 2692916688466420289}
   - component: {fileID: 782118486960482792}
   - component: {fileID: 7440838759172201710}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

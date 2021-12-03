@@ -4,27 +4,25 @@ using UnityEngine;
 
 public class InputTargeting : MonoBehaviour {
     RaycastHit hit;
-    public bool heroPlayer;
-    Vector3 targetDestination;
     private GameObject selectedHero;
     void Start() {  selectedHero = this.gameObject;}
     void Update() { characterController();}
     void characterController() {
-        if (Input.GetMouseButtonDown(1)) {
+        if (Input.GetMouseButtonDown(1) && selectedHero.GetComponent<Stats>().GetHealth() > 0) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1000)) {
+                // print(hit.collider.gameObject.name);
                 if(hit.collider.GetComponent<Targetable>() != null ) {
                     if(hit.collider.GetComponent<Targetable>().GetEnemyType() == Targetable.EnemyType.MINION) {
-                        selectedHero.GetComponent<HeroCombat>().setTargetedEnemy(hit.collider.gameObject); // targeting the enemy
+                        // Debug.Log("Targetting an Enemy!");
+                        selectedHero.GetComponent<HeroCombat>().setTargetedEnemy(hit.collider.gameObject); // assign a target to heroscript
                     }
                 }
                 else{
-                    selectedHero.GetComponent<HeroCombat>().setTargetedEnemy(null);
-                    if(hit.collider.gameObject.tag == "Ground")  {
-                        targetDestination = hit.point;
-                        selectedHero.GetComponent<Movement>().SetMovementFromInputTarget(targetDestination);
-                    }
+                    selectedHero.GetComponent<HeroCombat>().setTargetedEnemy(null); // assign no target enemy
+                    if(hit.collider.gameObject.tag == "Ground")  
+                        selectedHero.GetComponent<Movement>().SetMovementFromInputTarget(hit.point);
                 }
             } // end if physics
         } // end input mouse down

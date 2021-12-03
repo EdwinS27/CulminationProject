@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class GenericChampion : MonoBehaviour    {
-    private int levelUpPoints = 0;
-    private bool canLevelUp = false;
+    int gold = 0;
     int currentXP = 0;
     int currentLevel = 1;
+    int levelUpPoints = 1;
+    int pointsAvailableForUltimate = 1;
     float ability1Cost;
     float ability2Cost;
     float ability3Cost;
@@ -46,12 +47,13 @@ public class GenericChampion : MonoBehaviour    {
     [SerializeField]    float armorGrowth;
     [SerializeField]    float magicResistGrowth;
     [SerializeField]    float missileSpeed;
-    private int[] xpRequiredToLevelUp = {
+    int[] xpRequiredToLevelUp = {
         0, 280, 380, 480, 580, 680,
         780, 880, 980, 1080, 1180, 1280,
         1380, 1480, 1580, 1680, 1780, 1880
     };
     public Stats statsScript;
+    // public Sprite championPortrait;
     public Sprite abilityImage1;
     public Sprite abilityImage2;
     public Sprite abilityImage3;
@@ -102,36 +104,32 @@ public class GenericChampion : MonoBehaviour    {
     public void leveledAbility4()   {   this.ability4Points++;  }
     public void LevelAbility1()  {
         leveledAbility1();
-        // Debug.Log("Points in ability 1: " + this.ability1Points);
         ability1Damage = ability1Damages[ability1Points];
         ability1Duration = ability1CoolDowns[ability1Points];
         ability1Cost = ability1ResourceCosts[ability1Points];
-        // Debug.Log("Cost: " + ability1Cost + "\tDuration: " + ability1Duration);
-        canLevelUp = false;
+        leveledAnAbility();
     }
     public void LevelAbility2()  {
         leveledAbility2();
-        // Debug.Log("Points in ability 1: " + this.ability2Points);
         ability2Damage = ability2Damages[ability2Points];
         ability2Duration = ability2CoolDowns[ability2Points];
         ability2Cost = ability2ResourceCosts[ability2Points];
-        canLevelUp = false;
+        leveledAnAbility();
     }
     public void LevelAbility3()  {
         leveledAbility3();
-        // Debug.Log("Points in ability 3: " + this.ability3Points);
         ability3Damage = ability3Damages[ability3Points];
         ability3Duration = ability3CoolDowns[ability3Points];
         ability3Cost = ability3ResourceCosts[ability3Points];
-        canLevelUp = false;
+        leveledAnAbility();
     }
     public void LevelAbility4()  {
         leveledAbility4();
-        // Debug.Log("Points in ability 4: " + this.ability4Points);
         ability4Damage = ability4Damages[ability4Points];
         ability4Duration = ability4CoolDowns[ability4Points];
         ability4Cost = ability4ResourceCosts[ability4Points];
-        canLevelUp = false;
+        pointsAvailableForUltimate--;
+        leveledAnAbility();
     }
     public void checkXP()   {
         // Debug.Log("Current XP: " + currentXP + "\tNextXP: " + xpRequiredToLevelUp[currentLevel] + "\tCurrent Level: " + currentLevel);
@@ -146,25 +144,37 @@ public class GenericChampion : MonoBehaviour    {
             }
         }
     }
-    public void leveledAnAbility()  {this.levelUpPoints--;}
     public void LeveledUp()   {
         levelUpPoints++;
-        canLevelUp = true;
         currentXP = 0;
         currentLevel++;
         statsScript.AddGrowth(healthGrowth, manaGrowth, healthRegenGrowth, manaRegenGrowth, armorGrowth, magicResistGrowth, attackDamageGrowth);
+        if(currentLevel == 6 || currentLevel == 11 || currentLevel == 16){
+            pointsAvailableForUltimate++;
+        }
         
     }
-    public float getMissileSpeed(){   return this.missileSpeed;}
-    public bool GetCanLevelUp() {   return this.canLevelUp; }
-    public int GetCurrentLevel()    {   return currentLevel;   }
-    public float GetXP() {   return currentXP;  }
-    public void SetXP(int xp) {   currentXP = xp;    }
-    public void AddXP(int addThisXP) {    currentXP += addThisXP;}
+    public int GetNextXPLevel(){
+        if(currentLevel != 18){
+            return xpRequiredToLevelUp[currentLevel + 1];
+        }
+        else
+            return 0;
+    }
+    public void AddGold(int moreGold){this.gold += moreGold;}
+    public int GetXP(){return currentXP;}
+    public void SetXP(int xp){currentXP = xp;}
+    public void AddXP(int addThisXP){currentXP += addThisXP;}
+    public int GetCurrentLevel(){return currentLevel;}
+    public void leveledAnAbility(){this.levelUpPoints--;}
+    public int GetSkillablePoints(){return this.levelUpPoints; }
+    public int GetPointsAvailableForUltimate(){return this.pointsAvailableForUltimate;}
+    public float getMissileSpeed(){return this.missileSpeed;}
     // Get the Sprites of this champion
-    public Sprite GetAbilityImage1() {   return abilityImage1;}
-    public Sprite GetAbilityImage2() {   return abilityImage2;}
-    public Sprite GetAbilityImage3() {   return abilityImage3;}
-    public Sprite GetAbilityImage4() {   return abilityImage4;}
-    public T GenericMethod<T>(T param)  {   return param;}
+    // public Sprite GetChampionPortrait()  {   return this.championPortrait; }
+    public Sprite GetAbilityImage1(){return abilityImage1;}
+    public Sprite GetAbilityImage2(){return abilityImage2;}
+    public Sprite GetAbilityImage3(){return abilityImage3;}
+    public Sprite GetAbilityImage4(){return abilityImage4;}
+    public T GenericMethod<T>(T param){return param;}
 }
