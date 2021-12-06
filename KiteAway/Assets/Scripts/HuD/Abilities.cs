@@ -33,7 +33,6 @@ public class Abilities : MonoBehaviour {
         abilityImage2.fillAmount = 1;
         abilityImage3.fillAmount = 1;
         abilityImage4.fillAmount = 1;
-        champion = GameObject.FindGameObjectWithTag("Player").GetComponent<GenericChampion>();
         //skillShotIndicatorAbility1.GetComp1nt<Image>().enabled = false;
     }
     void Update() {
@@ -50,7 +49,7 @@ public class Abilities : MonoBehaviour {
         Ability4();
     }
     void Ability1() {
-        if (    Input.GetKeyDown(abilityKeyCode1) && ability1OnCooldown == false
+        if (    Input.GetKeyUp(abilityKeyCode1) && ability1OnCooldown == false
                 && (champion.statsScript.GetMana() - champion.GetAbility1Cost() >= 0)
                 && (champion.GetAbility1Points() > -1)
         ) {
@@ -71,7 +70,7 @@ public class Abilities : MonoBehaviour {
         }
     }
     void Ability2() {
-        if (Input.GetKey(abilityKeyCode2) && ability2OnCooldown == false
+        if (Input.GetKeyUp(abilityKeyCode2) && ability2OnCooldown == false
             && (champion.statsScript.GetMana() - champion.GetAbility2Cost() >= 0)
             && (champion.GetAbility2Points() > -1)
         )   {
@@ -91,7 +90,7 @@ public class Abilities : MonoBehaviour {
         }
     }
     void Ability3() {
-        if (Input.GetKey(abilityKeyCode3) && ability3OnCooldown == false
+        if (Input.GetKeyUp(abilityKeyCode3) && ability3OnCooldown == false
             && (champion.statsScript.GetMana() - champion.GetAbility3Cost() >= 0)
             && (champion.GetAbility3Points() > -1)
         )   {
@@ -111,7 +110,7 @@ public class Abilities : MonoBehaviour {
         }
     }
     void Ability4() {
-        if (Input.GetKey(abilityKeyCode4) && ability4OnCooldown == false
+        if (Input.GetKeyUp(abilityKeyCode4) && ability4OnCooldown == false
             && (champion.statsScript.GetMana() - champion.GetAbility4Cost() >= 0)
             && (champion.GetAbility4Points() > -1)
         )   {

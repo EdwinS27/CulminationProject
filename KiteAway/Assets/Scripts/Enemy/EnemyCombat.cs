@@ -5,58 +5,52 @@ public class EnemyCombat : MonoBehaviour {
     [Header ("Animation Variables")]
     public EnemyAttackType enemyAttackType;
     public GameObject offset;
-    private GameObject targetedEnemy;
+    public GameObject targetedEnemy;
     private bool canPerformRangedAttack = true;
-    private EnemyMovement enemyMoveScript;
-    private bool performMeleeAttack = true;
+    public bool canPerformMeleeAttack = true;
     private Animator _anim;
     private Stats statScript;
+    private EnemyMovement enemyMoveScript;
     [SerializeField] GameObject _projectileAuto;
     void Start() {
-        enemyMoveScript = GetComponent<EnemyMovement>();
         _anim = GetComponent<Animator>();
         statScript = GetComponent<Stats>();
+        enemyMoveScript = GetComponent<EnemyMovement>();
     }
     // Update is called once per frame
     void Update() {
-        if(targetedEnemy != null) { // if we have a target
+        if(targetedEnemy != null && targetedEnemy.GetComponent<Stats>().GetHealth() > 0){
             if(Vector3.Distance(transform.position, targetedEnemy.transform.position) > statScript.GetAttackRange()){
                 _anim.SetBool("Moving", true);
+                _anim.SetBool("Basic Attack", false);
                 enemyMoveScript.SetMoveToEnemy(true);
             }
             else {
                 _anim.SetBool("Moving", false);
+                enemyMoveScript.SetMoveToEnemy(false);
                 if(enemyAttackType == EnemyAttackType.Melee)
-                    if (performMeleeAttack){
-                        enemyMoveScript.SetMoveToEnemy(false);
+                    if (canPerformMeleeAttack)
                         StartCoroutine(MeleeAttackInterval());
-                    }
                 else if(enemyAttackType == EnemyAttackType.Ranged){
-                        enemyMoveScript.SetMoveToEnemy(false);
-                        if (canPerformRangedAttack)
+                        if (canPerformRangedAttack){
+                            enemyMoveScript.SetMoveToEnemy(false);
                             StartCoroutine(RangedAttackInterval());
+                        }
                 }
             }
         }
         else{
-            targetedEnemy = enemyMoveScript.GetTargetedEnemy();
+            targetedEnemy = GameObject.FindGameObjectWithTag("Player");
         }
-
     }
     IEnumerator MeleeAttackInterval() {
-        performMeleeAttack = false;
         _anim.SetBool("Basic Attack", true);
+        canPerformMeleeAttack = false;
         yield return new WaitForSeconds(statScript.GetAttackTime() / (100 + statScript.GetAttackTime()) * .01f);
     }
     public void MeleeAttack() {
-        if(targetedEnemy != null) {
-            if (targetedEnemy.GetComponent<Targetable>().GetEnemyType() == Targetable.EnemyType.CHARACTER)  {
-                targetedEnemy.GetComponent<Stats>().takeBasicDamage(this.gameObject, statScript.GetAttackDamage());
-                _anim.SetBool("Basic Attack", false);
-                performMeleeAttack = true;
-            }
-
-        }
+        targetedEnemy.GetComponent<Stats>().takeBasicDamage(this.gameObject, statScript.GetAttackDamage());
+        enableAttacks();
     }
     public void setTargetedEnemy(GameObject targetedEnemy) {    this.targetedEnemy = targetedEnemy;}
     public GameObject getTargetedEnemy() {    return this.targetedEnemy;}
@@ -84,7 +78,6 @@ public class EnemyCombat : MonoBehaviour {
             }
         }
     }
-
     void SpawnRangedProjectile(GameObject targetedEnemyObj) {
         float damage = statScript.GetAttackDamage();
         float armorPen = statScript.GetArmorPen();
@@ -93,5 +86,10 @@ public class EnemyCombat : MonoBehaviour {
         // Debug.Log("The current champion: " + this.gameObject + "'s missile speed is: " + missileSpeed);
         auto.GetComponent<RangedAutoAttack>().SetTarget(this.gameObject, targetedEnemy, true, damage, armorPen, missileSpeed);
         _anim.SetBool("Basic Attack", false);
+    }
+    void enableAttacks(){
+        canPerformMeleeAttack = true;
+        canPerformRangedAttack = true;
+        this._anim.SetBool("Basic Attack", false);
     }
 }

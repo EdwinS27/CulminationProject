@@ -7,7 +7,7 @@ public class GenericChampion : MonoBehaviour    {
     int currentXP = 0;
     int currentLevel = 1;
     int levelUpPoints = 1;
-    int pointsAvailableForUltimate = 1;
+    int pointsAvailableForUltimate = 0;
     float ability1Cost;
     float ability2Cost;
     float ability3Cost;

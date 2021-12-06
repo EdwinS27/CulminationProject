@@ -16,19 +16,19 @@ public class RangedAutoAttack : MonoBehaviour   {
             if(target == null) // removing this kills the player ???????????
                 Destroy(this.gameObject);
             else{
-                var lookAtTarget = new Vector3(
-                    target.transform.position.x - transform.position.x,
-                    0,
-                    target.transform.position.z - transform.position.z
-                );
-                objRotation = Quaternion.LookRotation(lookAtTarget);
-                if(transform.rotation != objRotation){
-                    transform.rotation = Quaternion.Slerp(
-                        transform.rotation,
-                        objRotation,
-                        missileSpeed * Time.deltaTime
-                    );
-                }
+                // var lookAtTarget = new Vector3(
+                //     target.transform.position.x - transform.position.x,
+                //     0,
+                //     target.transform.position.z - transform.position.z
+                // );
+                // objRotation = Quaternion.LookRotation(lookAtTarget);
+                // if(transform.rotation != objRotation){
+                //     transform.rotation = Quaternion.Slerp(
+                //         transform.rotation,
+                //         objRotation,
+                //         missileSpeed * Time.deltaTime
+                //     );
+                // }
                 transform.position = Vector3.MoveTowards(transform.position, target.transform.position, missileSpeed * Time.deltaTime);
             }
         }

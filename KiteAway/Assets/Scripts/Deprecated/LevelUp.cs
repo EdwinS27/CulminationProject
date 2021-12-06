@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor.UI;
 // DEPRECATED.
-public class LevelUp : MonoBehaviour    {
+// public class LevelUp : MonoBehaviour    {
     // GenericChampion champion;
     // public GameObject levelQ;
     // public GameObject levelW;
@@ -51,4 +47,4 @@ public class LevelUp : MonoBehaviour    {
     //         levelR.SetActive(false);
     //     }
     // }
-}
+// }

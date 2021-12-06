@@ -1,14 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class GameManager : SelectCharacter {
     // Camera Settings
     private Transform playerCharacter;
-    private Vector3 cameraOffset;
-    [Range(0.01f, 1.0f)]
-    private float smoothness = 0.5f;
     public GameObject location1;
     public GameObject location2;
     public GameObject location3;
@@ -24,26 +20,25 @@ public class GameManager : SelectCharacter {
     private float timeUntilSpawnBombers = 0;
     private float spawnDelayMinions  = 30f;
     private float spawnDelayBombers  = 45f;
-    private float time = 0; // seconds
-    private float timeMin = 0;  // mins
-    private float timeHour = 0; // ???????????????? why are you still playing this long
     private int intensity = 1;
-    public Text gameTimer; // Format: 00 minutes : 00 seconds
     private GameObject createChampion;
     public GameObject[] champions;
-    private GenericChampion champion;
     public GameObject levelQ;
     public GameObject levelW;
     public GameObject levelE;
     public GameObject levelR;
     private  Vector3 startLocation = new Vector3(0,1,0);
+    private bool championIsAlive = true;
+    private GenericChampion champion;
+    // public Abilities abilityScript;
+    bool prevActivateDeath = true;
+    float timeDeathDelay = 8f;
     private void Start() {
         spawnCharacter();
-        cameraOffset = transform.position - playerCharacter.transform.position;
-        var minion1 = Instantiate(enemyMinion, new Vector3(10f,0f,10f), Quaternion.identity);
-        minion1.GetComponent<EnemyMovement>().SetTargetEnemy(createChampion);
-        var minion2 = Instantiate(enemyMinion, new Vector3(-10f,0f,-10f), Quaternion.identity);
-        minion2.GetComponent<EnemyMovement>().SetTargetEnemy(createChampion);
+        // var minion1 = Instantiate(enemyMinion, new Vector3(10f,0f,10f), Quaternion.identity);
+        // minion1.GetComponent<EnemyCombat>().setTargetedEnemy(createChampion);
+        // var minion2 = Instantiate(enemyMinion, new Vector3(-10f,0f,-10f), Quaternion.identity);
+        // minion2.GetComponent<EnemyCombat>().setTargetedEnemy(createChampion);
     }
     void spawnCharacter(){
         int option = getSelectedCharacter();
@@ -66,45 +61,16 @@ public class GameManager : SelectCharacter {
         }
     }
     void Update()   {
-        Vector3 newPos = playerCharacter.position + cameraOffset;
-        transform.position = Vector3.Slerp(transform.position, newPos, smoothness);
-        monitorChampionResource();
-        EnemySpawner();
-        incrementTime();
-        setTime();
-        checkForUpgradableSkills();
+        if(championIsAlive){
+            // EnemySpawner();
+            monitorChampionResource();
+            checkForUpgradableSkills();
+            levelAbilitiesWithKeys();
+        }
         checkGameState();
-    }
-    void incrementTime()    {
-        if(time > 59)   {
-            time = 0;
-            if(timeMin < 59)
-                timeMin++;
-            else{
-                timeHour++;
-                timeMin = 0;
-            }
+        if(!prevActivateDeath){
+            WaitToSeeDeathAnimationThenGoToGameOver();
         }
-        else    {
-            time += Time.deltaTime;
-        }
-    }
-    void setTime()  {
-        string timeFormat = "";
-        // minutes
-        if(timeMin < 1)
-            timeFormat += "00 : ";
-        else if(timeMin < 9)
-            timeFormat += "0 "+ timeMin + " : ";
-        else
-            timeFormat += timeMin + " : ";
-        // seconds
-        if(time < 9)    {
-            timeFormat += "0" + Mathf.Round(time);
-        }
-        else                                        
-            timeFormat += Mathf.Round(time);
-        gameTimer.text = timeFormat;
     }
     void monitorChampionResource()  {
         if (timeUntilRegen > 0)
@@ -135,22 +101,39 @@ public class GameManager : SelectCharacter {
         if(intensity > 1){
             minion.GetComponent<Stats>().AddMoveSpeed(intensity * speed);
             minion.GetComponent<Stats>().SetMaxHealth(intensity * maxHealth);
+            minion.GetComponent<EnemyCombat>().setTargetedEnemy(createChampion);
         }
     }
     void spawnEnemyMinions()    {
         Vector3 location = PickLocation();
         var minion = Instantiate(enemyMinion, location, Quaternion.identity);
-        minion.GetComponent<EnemyMovement>().SetTargetEnemy(createChampion);
+        minion.GetComponent<EnemyCombat>().setTargetedEnemy(createChampion);
         if(intensity > 1){
             minion.GetComponent<Stats>().AddMoveSpeed(intensity * speed);
             minion.GetComponent<Stats>().SetMaxHealth(intensity * maxHealth);
             minion.GetComponent<Stats>().AddMagicResist(intensity * magicResist);
         }
     }
-    void manageGame(){
-        if(champion.statsScript.GetHealth() <= 0){
-            // the game is over so we end the game and show the stats
+    public void levelAbilitiesWithKeys(){
+        if(champion.GetSkillablePoints() > 0){
+            if(Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.LeftAlt)){
+                champion.LevelAbility1();
+                // abilityScript.SetCooldownDurationAbility1();
+                }
+            else if(Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftAlt)){
+                champion.LevelAbility2();
+                // abilityScript.SetCooldownDurationAbility2();
+                }
+            else if(Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.LeftAlt)){
+                champion.LevelAbility3();
+                // abilityScript.SetCooldownDurationAbility3();
+                }
         }
+        else if(champion.GetPointsAvailableForUltimate() > 0)
+            if(Input.GetKey(KeyCode.R) && Input.GetKey(KeyCode.LeftAlt)){
+                champion.LevelAbility4();
+                // abilityScript.SetCooldownDurationAbility4();
+                }
     }
     public void LevelAbility1(){champion.LevelAbility1();}
     public void LevelAbility2(){champion.LevelAbility2();}
@@ -186,16 +169,24 @@ public class GameManager : SelectCharacter {
     }
     public void checkGameState(){
         if(champion.statsScript.GetHealth() <= 0){
-            // print("Dead");
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().SetBool("Death", true);
-            WaitToSeeDeathAnimationThenGoToGameOver();
+            // print("end");
+            championIsAlive = false;
+            createChampion.GetComponent<Animator>().SetBool("Death", true);
+            if(prevActivateDeath){
+                prevActivateDeath = false;
+            }
         }
     }
     public GenericChampion getChosenChampion(){
         return this.champion;
     }
-    IEnumerator WaitToSeeDeathAnimationThenGoToGameOver(){
-        yield return new WaitForSeconds(5f);
-        SceneManager.LoadScene("GameOver");
+    void swapScene(){
+        SceneManager.LoadScene("GameOverStats");
+    }
+    public void WaitToSeeDeathAnimationThenGoToGameOver(){
+        if(timeDeathDelay > 0)
+            timeDeathDelay -= Time.deltaTime;
+        else
+            swapScene();
     }
 }

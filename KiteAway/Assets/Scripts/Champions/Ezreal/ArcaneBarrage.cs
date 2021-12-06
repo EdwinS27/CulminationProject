@@ -8,7 +8,7 @@ public class ArcaneBarrage : SkillShots  {
     float bonusAD;
     Vector3 TargetDestination;
     private void Start() {
-        transform.rotation *= Quaternion.Euler(90, 0, 0);
+        transform.rotation *= Quaternion.Euler(90, 1, 1);
     }
     new private void HitSomething() {
         shotsConnectedIncrement();
@@ -22,14 +22,11 @@ public class ArcaneBarrage : SkillShots  {
     }
     private void OnTriggerEnter(Collider collidedWith) {
         if(collidedWith.tag == "Enemy")    {
-            // Debug.Log(collidedWith);
             targetHit = collidedWith.gameObject;
             HitSomething();
         }
         else if(collidedWith.tag == "Boundary"){Destroy(this.gameObject);}
     }
-
-    // Setters & Getters for TargetDestination
     public Vector3 GetTargetDestination(){return TargetDestination;}
     public void SetTargetDestination(Vector3 targetLocation){TargetDestination = targetLocation;}
     public void SetArcaneBarrageDamage(float damageInput, float bonusAD, float ap)  {

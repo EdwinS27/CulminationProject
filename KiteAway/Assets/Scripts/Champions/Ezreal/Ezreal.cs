@@ -64,13 +64,11 @@ public class Ezreal : GenericChampion {
     }
     // overrides the generic champion abilityOne
     public override void UseAbility1() {
+        _anim.SetBool("Shoot Ability", true);
+        // Debug.Log(_anim.GetBool("Shoot Ability"));
         GetMousePositionForSkillShot(); // if we can Use the ability then, and only then do we get the moUse position
-        _anim.SetBool("ShootAbility", true);
-        // Debug.Log("ShootAbility: " + _anim.GetBool("ShootAbility"));
         statsScript.DeductMana(GetAbility1Cost());
         SpawnMysticShot();
-        // _anim.SetBool("Basic Attack", false);
-        _anim.SetBool("ShootAbility", false);
     }
     // overrides the generic champion abilityTwo
     public override void UseAbility2() {
@@ -105,15 +103,16 @@ public class Ezreal : GenericChampion {
         }
     }
     public void SpawnMysticShot() {
-        // UseSkillShot = true;
-        var createdMysticShot = Instantiate(prefabMysticShot, offset.transform.position, Quaternion.LookRotation(offset.transform.position - skillShotTargetLocation));
-        // Debug.Log(createdMysticShot);
+        var createdMysticShot = Instantiate(prefabMysticShot, offset.transform.position, Quaternion.identity);
+        createdMysticShot.transform.rotation = Quaternion.LookRotation(skillShotTargetLocation);
         createdMysticShot.GetComponent<MysticShot>().setGameObjectSentFrom(this.gameObject);
         createdMysticShot.GetComponent<MysticShot>().setMissileSpeed(getMissileSpeed());
         createdMysticShot.GetComponent<MysticShot>().setTargetDestination(skillShotTargetLocation);
         // formula for bonus mystic shot damage is: bonus = abilityDamage + (totalAttackDamage * 130% or 1.3) + (15 % totalAbilityDamage)
         float totalDamage = GetAbility1Damage() + (statsScript.GetAttackDamage() * 1.3f) + (statsScript.GetAbilityDamage() * .15f);
         createdMysticShot.GetComponent<MysticShot>().setMysticShotDamage(totalDamage, statsScript.GetArmorPen());
+        _anim.SetBool("Shoot Ability", false);
+        // Debug.Log(_anim.GetBool("Shoot Ability"));
     }
     public void SpawnEssenceFlux()  {
         // UseSkillShot = true;
@@ -122,18 +121,20 @@ public class Ezreal : GenericChampion {
     }
     public void SpawnArcaneBarrage()  {
         // UseSkillShot = true;
-        var createdArcaneBarrage = Instantiate(prefabArcaneBarrage, offset.transform.position, Quaternion.LookRotation(offset.transform.position - skillShotTargetLocation));
-        createdArcaneBarrage.GetComponent<ArcaneBarrage>().setMissileSpeed(getMissileSpeed());
+        var createdArcaneBarrage = Instantiate(prefabArcaneBarrage, offset.transform.position, Quaternion.identity);
+        createdArcaneBarrage.transform.rotation = Quaternion.LookRotation(skillShotTargetLocation);
+        // createdArcaneBarrage.transform.rotation = Quaternion.LookRotation(offset.transform.position - skillShotTargetLocation);
         createdArcaneBarrage.GetComponent<ArcaneBarrage>().setGameObjectSentFrom(this.gameObject);
-        createdArcaneBarrage.GetComponent<ArcaneBarrage>().SetTargetDestination(skillShotTargetLocation);
+        createdArcaneBarrage.GetComponent<ArcaneBarrage>().setMissileSpeed(getMissileSpeed());
+        createdArcaneBarrage.GetComponent<ArcaneBarrage>().setTargetDestination(skillShotTargetLocation);
         createdArcaneBarrage.GetComponent<ArcaneBarrage>().SetArcaneBarrageDamage(GetAbility4Damage(), statsScript.GetAttackDamage() * .5f, statsScript.GetAbilityDamage() * .75f);
     }
     void GetMousePositionForSkillShot() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 1000)) {
-            skillShotTargetLocation = (transform.position - hit.point).normalized;
-            moveScript.AdjustRotationToTarget(skillShotTargetLocation);
+            // skillShotTargetLocation = (hit.point - transform.position).normalized;
+            // moveScript.AdjustRotationToTarget(skillShotTargetLocation);
         }
     }
     // Does the actual change in movement.

@@ -7,12 +7,10 @@ public class CharAnimator : MonoBehaviour   {
     float motionSmoothTime = .1f;
     void Start()    {
         _anim = GetComponent<Animator>();
-        statsScript = GetComponent<Stats>();
         moveScript = GetComponent<Movement>();
     }
     void Update()   {
         movementAnimation();
-        _anim.SetFloat("Speed", speed, motionSmoothTime, Time.deltaTime);
     }
     void movementAnimation(){
         if(moveScript.GetWalking()){
@@ -28,5 +26,6 @@ public class CharAnimator : MonoBehaviour   {
             else
                 speed = 0;
         }
+        _anim.SetFloat("Speed", speed, motionSmoothTime, Time.deltaTime);
     }
 }

@@ -7,7 +7,6 @@ public class Kogmaw : GenericChampion {
     float[] affectMoveSpeed = {20f, 28f, 36f, 44f, 52f}; // for 
     int stacks = 0; // amount of stacks , limit is 5
     float stacksDuration; // duration of stack, interacts with Time.DeltaTime
-    float bonusAttackSpeed;
     float originalAttackSpeed;
     bool activateAttackRangeIncrease = false;
     float timer;
@@ -44,8 +43,6 @@ public class Kogmaw : GenericChampion {
             stacksDuration = 0;
             stacks = 0;
         }
-        if(stacksDuration < 0)
-            bonusAttackSpeed = -1;
     }
 
     public float getStacks()    {   return this.stacks; }

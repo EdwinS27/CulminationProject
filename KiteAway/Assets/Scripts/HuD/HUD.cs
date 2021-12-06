@@ -14,7 +14,7 @@ public class HUD : MonoBehaviour    {
     public Image ability2;
     public Image ability3;
     public Image ability4;
-    GenericChampion champion;
+    public GenericChampion champion;
     void Start()    {
         hpBar = gameObject.GetComponentsInChildren<Image>()[1];
         // Debug.Log(hpBar);
@@ -31,8 +31,6 @@ public class HUD : MonoBehaviour    {
         updateHealthInHud();
         updateManaInHud();
         updateXp();
-    }
-    private void updateValues()   {
     }
     private void updateHealthInHud(){
         float maxHealth = champion.statsScript.GetMaxHealth();

@@ -829,10 +829,11 @@ GameObject:
   - component: {fileID: 6898519072507162636}
   - component: {fileID: 6898519072507162627}
   - component: {fileID: 6898519072507162626}
-  - component: {fileID: 6898519072507162625}
   - component: {fileID: 6898519072507162624}
   - component: {fileID: 6898519072507162631}
   - component: {fileID: 2479167161554390968}
+  - component: {fileID: 1159127251644046435}
+  - component: {fileID: 1656447566127392831}
   m_Layer: 6
   m_Name: ZombieMinion
   m_TagString: Enemy
@@ -848,7 +849,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6898519072507162630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 5, y: 1, z: 5}
   m_LocalScale: {x: 1.5, y: 1, z: 1.5}
   m_Children:
   - {fileID: 7056713551426822657}
@@ -894,14 +895,14 @@ MonoBehaviour:
   maxHealth: 477
   currentLevel: 0
   goldWorth: 150
-  moveSpeed: 5
+  moveSpeed: 1
   abilityDamage: 0
   cooldownReduction: 0
-  attackRange: 2
-  attackSpeed: 1.25
+  attackRange: 1
+  attackSpeed: 5
   bonusAttackSpeed: 0
-  attackTime: 5
-  attackDamage: 120
+  attackTime: 3
+  attackDamage: 50
   bonusAttackDamage: 0
   criticalAttackDamage: 0
   mana: 0
@@ -937,18 +938,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a3592e4a1aa7e64996fb497a24086ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6898519072507162625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6898519072507162630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e07af293d70d3f049b6c45a02e6f824c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!54 &6898519072507162624
@@ -996,8 +985,33 @@ MonoBehaviour:
   enemyAttackType: 0
   offset: {fileID: 0}
   targetedEnemy: {fileID: 0}
-  canPerformRangedAttack: 0
+  canPerformMeleeAttack: 1
   _projectileAuto: {fileID: 0}
+--- !u!114 &1159127251644046435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6898519072507162630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47e691d2f898fb84b82adbd405de4c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1656447566127392831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6898519072507162630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e07af293d70d3f049b6c45a02e6f824c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 0}
 --- !u!1 &7117227699774540306
 GameObject:
   m_ObjectHideFlags: 0
