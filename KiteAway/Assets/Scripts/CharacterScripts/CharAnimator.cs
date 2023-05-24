@@ -7,6 +7,7 @@ public class CharAnimator : MonoBehaviour   {
     float motionSmoothTime = .1f;
     void Start()    {
         _anim = GetComponent<Animator>();
+        statsScript = GetComponent<Stats>();
         moveScript = GetComponent<Movement>();
     }
     void Update()   {
@@ -15,16 +16,13 @@ public class CharAnimator : MonoBehaviour   {
     void movementAnimation(){
         if(moveScript.GetWalking()){
             if(speed < 1){
-                speed+= .001f;
+                speed += (statsScript.GetMoveSpeed() / 100);
             }
             else
                 speed = 1f;
         }
         else{
-            if(speed > .5)
-                speed -= .001f;
-            else
-                speed = 0;
+            speed = 0;
         }
         _anim.SetFloat("Speed", speed, motionSmoothTime, Time.deltaTime);
     }

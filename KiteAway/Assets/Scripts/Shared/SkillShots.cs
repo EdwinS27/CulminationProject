@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class SkillShots : MonoBehaviour {
     private bool activateDestruct = false;
@@ -33,12 +34,11 @@ public class SkillShots : MonoBehaviour {
     public void setTargetDestination(Vector3 targetLocation)  {
         shotsFiredIncrement();
         this.targetDestination = targetLocation;
-        targetDestination.y = 0;
+        this.targetDestination.y = 0;
     }
     // Movement Options
-    public void moveTowardsTargetLocation(){
-        transform.position -= this.targetDestination * this.missileSpeed * Time.deltaTime;
-    }
+    public void moveTowardsTargetLocation(){ transform.position += targetDestination * missileSpeed * Time.deltaTime;}
+
     public void fallFromSky()   {
         var fallingY = transform.position.y - (this.missileSpeed * Time.deltaTime);
         transform.position = new Vector3(transform.position.x, fallingY, transform.position.z);

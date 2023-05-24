@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour {
     private Vector3 targetDestination;
     private Vector3 lookAtTarget;
     private Quaternion charRotation;
-    private float distanceToStop = 0.01f;
+    private float distanceToStop = 0.1f;
     private bool lockedOutOfMovement = false;
     private bool walking = false;
     bool characterIsAttacking = false;
@@ -18,88 +18,79 @@ public class Movement : MonoBehaviour {
         heroCombatScript = GetComponent<HeroCombat>();
     }
     void Update() {
-            if (walking)
-                Move();
-        // if(!lockedOutOfMovement)
+        if (walking) characterMovement();
+        else characterAdjustment();
+
     }
-    void Move() {
-        // if(!characterIsAttacking){
-        // }
+    void characterMovement() {
         transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            charRotation,
-            statsScript.GetRotationSpeed() * Time.deltaTime
-        );
-        Vector3 adjustedtargetdestination = new Vector3(targetDestination.x, transform.position.y, targetDestination.z);
+            transform.rotation, charRotation,
+            statsScript.GetRotationSpeed() * Time.deltaTime);
+
         transform.position = Vector3.MoveTowards(
             transform.position,
-            // targetDestination,
-            adjustedtargetdestination,
-            (statsScript.GetMoveSpeed() * Time.deltaTime));
-        if (Vector3.Distance(transform.position, adjustedtargetdestination) <= distanceToStop) {
-            distanceToStop = 0.01f;
+             targetDestination,
+            ((statsScript.GetMoveSpeed() / 2) * Time.deltaTime));
+
+        if (Vector3.Distance(transform.position, targetDestination) <= distanceToStop) {
+            distanceToStop = 1f; // can test this out
             walking = false;
         }
     }
-    public void SetMovementFromInputTarget(Vector3 target)    {
+
+    void characterAdjustment() {
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation, charRotation,
+            statsScript.GetRotationSpeed() * Time.deltaTime);
+    }
+
+    public void SetMovementFromInputTarget(Vector3 target) {
+        heroCombatScript.notAttacking();
         lookAtTarget = new Vector3(
             target.x - transform.position.x,
-            target.y - transform.position.y,
-            target.z - transform.position.z
-        );
+            0,
+            target.z - transform.position.z );
         charRotation = Quaternion.LookRotation(lookAtTarget);
+        target.y = 0;
         targetDestination = target;
+        
         walking = true;
-        distanceToStop = 0.01f;
+        distanceToStop = 1f;
     }
     // This would be based on attack range
     public void SetMovementFromHeroCombat(Vector3 target, float stoppingDistance)    {
         lookAtTarget = new Vector3(
             target.x - transform.position.x,
             0,
-            target.z - transform.position.z
-        );
+            target.z - transform.position.z );
         charRotation = Quaternion.LookRotation(lookAtTarget);
         targetDestination = target;
         walking = true;
         distanceToStop = stoppingDistance;
     }
     public void AdjustRotationToTarget(GameObject target){
-        // lookAtTarget = new Vector3(
-        //     target.transform.position.x - transform.position.x,
-        //     0,
-        //     target.transform.position.z - transform.position.z
-        // );
-        // var angle = Vector3.Angle(lookAtTarget, transform.position);
-        // if(angle > 1){
-        //     charRotation = Quaternion.LookRotation(lookAtTarget);
-        //     transform.rotation = Quaternion.Slerp(
-        //         transform.rotation,
-        //         charRotation,
-        //         statsScript.GetRotationSpeed() * Time.deltaTime
-        //     );
-        // }
+        lookAtTarget = new Vector3(
+            target.transform.position.x - transform.position.x,
+            0,
+            target.transform.position.z - transform.position.z
+        );
+
+        charRotation = Quaternion.LookRotation(lookAtTarget);
     }
+
     public void AdjustRotationToTarget(Vector3 target){
-        // lookAtTarget = new Vector3(
-        //     target.x - transform.position.x,
-        //     0,
-        //     target.z - transform.position.z
-        // );
-        // var angle = Vector3.Angle(lookAtTarget, transform.position);
-        // if(angle > 1){
-        //     charRotation = Quaternion.LookRotation(lookAtTarget);
-        //     transform.rotation = Quaternion.Slerp(
-        //         transform.rotation,
-        //         charRotation,
-        //         statsScript.GetRotationSpeed() * Time.deltaTime
-        //     );
-        // }
+        lookAtTarget = new Vector3(
+            target.x - transform.position.x,
+            0,
+            target.z - transform.position.z);
+        charRotation = Quaternion.LookRotation(lookAtTarget);
     }
+
+
     public bool GetWalking(){   return this.walking;}
     public void SetWalking(bool walk){   this.walking = walk;}
     public bool GetAttacking(){ return this.characterIsAttacking;}
-    public void LockMovement(bool locked){this.lockedOutOfMovement = locked;}
+    public void LockMovement(bool locked){ this.walking = locked;}
 }
 
 /*

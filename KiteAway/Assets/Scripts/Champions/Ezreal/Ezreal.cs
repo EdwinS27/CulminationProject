@@ -1,4 +1,7 @@
+using System.Drawing;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+
 public class Ezreal : GenericChampion {
     private Animator _anim;
     public GameObject offset;
@@ -65,7 +68,6 @@ public class Ezreal : GenericChampion {
     // overrides the generic champion abilityOne
     public override void UseAbility1() {
         _anim.SetBool("Shoot Ability", true);
-        // Debug.Log(_anim.GetBool("Shoot Ability"));
         GetMousePositionForSkillShot(); // if we can Use the ability then, and only then do we get the moUse position
         statsScript.DeductMana(GetAbility1Cost());
         SpawnMysticShot();
@@ -103,8 +105,10 @@ public class Ezreal : GenericChampion {
         }
     }
     public void SpawnMysticShot() {
-        var createdMysticShot = Instantiate(prefabMysticShot, offset.transform.position, Quaternion.identity);
-        createdMysticShot.transform.rotation = Quaternion.LookRotation(skillShotTargetLocation);
+        //moveScript.AdjustRotationToTarget(skillShotTargetLocation);
+        var createdMysticShot = Instantiate(prefabMysticShot, offset.transform.position, transform.rotation);
+        Debug.Log("rotation it should be at: " + transform.rotation.y);
+        createdMysticShot.transform.rotation = Quaternion.Euler(270, createdMysticShot.transform.rotation.y, 0);
         createdMysticShot.GetComponent<MysticShot>().setGameObjectSentFrom(this.gameObject);
         createdMysticShot.GetComponent<MysticShot>().setMissileSpeed(getMissileSpeed());
         createdMysticShot.GetComponent<MysticShot>().setTargetDestination(skillShotTargetLocation);
@@ -132,10 +136,7 @@ public class Ezreal : GenericChampion {
     void GetMousePositionForSkillShot() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 1000)) {
-            // skillShotTargetLocation = (hit.point - transform.position).normalized;
-            // moveScript.AdjustRotationToTarget(skillShotTargetLocation);
-        }
+        if (Physics.Raycast(ray, out hit, 1000)) { skillShotTargetLocation = ( hit.point - transform.position ).normalized ; }
     }
     // Does the actual change in movement.
     void Shift(float changeInX, float changeInZ)    {

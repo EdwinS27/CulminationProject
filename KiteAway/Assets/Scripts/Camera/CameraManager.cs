@@ -12,7 +12,7 @@ public class CameraManager : MonoBehaviour{
     public Transform playerCharacter;
     private Vector3 cameraOffset;
     private float smoothness = 0.5f;
-    private Vector3 setCameraPosition = new Vector3(3f,7f,20f);
+    private Vector3 setCameraPosition = new Vector3(45f,8f, 60f);
     private void Start() {
         mainCam = GetComponent<Camera>();
         camFOV = mainCam.fieldOfView;
@@ -28,7 +28,7 @@ public class CameraManager : MonoBehaviour{
         float mouseScrollInput = Input.GetAxis("Mouse ScrollWheel");
         // print(mouseScrollInput);
         camFOV -= mouseScrollInput * zoomSpeed;
-        camFOV = Mathf.Clamp(camFOV, 5, 40);
+        camFOV = Mathf.Clamp(camFOV, 35, 45);
         mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, camFOV, zoomSpeed);
     }
     void manageCamera(){
@@ -53,11 +53,12 @@ public class CameraManager : MonoBehaviour{
         }
         transform.position = pos;
     }
+
     void lockCamera(){
         Vector3 camPosition = new Vector3(
-            playerCharacter.position.x + 4f,
-            15f,
-            playerCharacter.position.z + 22f
+            playerCharacter.position.x,
+            transform.position.y,
+            playerCharacter.position.z + 15f
         );
         transform.position = camPosition;
     }

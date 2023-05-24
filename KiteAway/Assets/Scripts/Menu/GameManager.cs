@@ -27,7 +27,7 @@ public class GameManager : SelectCharacter {
     public GameObject levelW;
     public GameObject levelE;
     public GameObject levelR;
-    private  Vector3 startLocation = new Vector3(0,1,0);
+    private  Vector3 startLocation = new Vector3(45f, 0f, 45f);
     private bool championIsAlive = true;
     private GenericChampion champion;
     // public Abilities abilityScript;
@@ -35,10 +35,10 @@ public class GameManager : SelectCharacter {
     float timeDeathDelay = 8f;
     private void Start() {
         spawnCharacter();
-        // var minion1 = Instantiate(enemyMinion, new Vector3(10f,0f,10f), Quaternion.identity);
-        // minion1.GetComponent<EnemyCombat>().setTargetedEnemy(createChampion);
-        // var minion2 = Instantiate(enemyMinion, new Vector3(-10f,0f,-10f), Quaternion.identity);
-        // minion2.GetComponent<EnemyCombat>().setTargetedEnemy(createChampion);
+        var minion1 = Instantiate(enemyMinion, new Vector3(10f,0f,10f), Quaternion.identity);
+        minion1.GetComponent<EnemyCombat>().setTargetedEnemy(createChampion);
+        var minion2 = Instantiate(enemyMinion, new Vector3(-10f,0f,-10f), Quaternion.identity);
+        minion2.GetComponent<EnemyCombat>().setTargetedEnemy(createChampion);
     }
     void spawnCharacter(){
         int option = getSelectedCharacter();
@@ -59,6 +59,9 @@ public class GameManager : SelectCharacter {
             spawnEnemyBombers();
             timeUntilSpawnBombers = spawnDelayBombers;
         }
+    }
+    private void Awake() {
+        Cursor.lockState = CursorLockMode.Confined; // keep confined in the game window
     }
     void Update()   {
         if(championIsAlive){
@@ -142,22 +145,14 @@ public class GameManager : SelectCharacter {
     public void checkForUpgradableSkills()    {
         // print(champion.GetSkillablePoints());
         if(champion.GetSkillablePoints() > 0){
-            if(champion.GetAbility1Points() < 4)
-                levelQ.SetActive(true);
-            else
-                levelQ.SetActive(false);
-            if(champion.GetAbility2Points() < 4)
-                levelW.SetActive(true);
-            else
-                levelW.SetActive(false);
-            if(champion.GetAbility3Points() < 4)
-                levelE.SetActive(true);
-            else
-                levelE.SetActive(false);
-            if(champion.GetPointsAvailableForUltimate() > 0)
-                levelR.SetActive(true);
-            else
-                levelR.SetActive(false);
+            if(champion.GetAbility1Points() < 4) levelQ.SetActive(true);
+            else levelQ.SetActive(false);
+            if(champion.GetAbility2Points() < 4) levelW.SetActive(true);
+            else levelW.SetActive(false);
+            if(champion.GetAbility3Points() < 4) levelE.SetActive(true);
+            else levelE.SetActive(false);
+            if(champion.GetPointsAvailableForUltimate() > 0) levelR.SetActive(true);
+            else levelR.SetActive(false);
             
         }
         else{
@@ -167,26 +162,18 @@ public class GameManager : SelectCharacter {
             levelR.SetActive(false);
         }
     }
+    // its breaking here
     public void checkGameState(){
         if(champion.statsScript.GetHealth() <= 0){
-            // print("end");
             championIsAlive = false;
             createChampion.GetComponent<Animator>().SetBool("Death", true);
-            if(prevActivateDeath){
-                prevActivateDeath = false;
-            }
+            if(prevActivateDeath) prevActivateDeath = false;
         }
     }
-    public GenericChampion getChosenChampion(){
-        return this.champion;
-    }
-    void swapScene(){
-        SceneManager.LoadScene("GameOverStats");
-    }
+    public GenericChampion getChosenChampion(){ return this.champion; }
+    void swapScene(){ SceneManager.LoadScene("GameOverStats"); }
     public void WaitToSeeDeathAnimationThenGoToGameOver(){
-        if(timeDeathDelay > 0)
-            timeDeathDelay -= Time.deltaTime;
-        else
-            swapScene();
+        if(timeDeathDelay > 0) timeDeathDelay -= Time.deltaTime;
+        else swapScene();
     }
 }

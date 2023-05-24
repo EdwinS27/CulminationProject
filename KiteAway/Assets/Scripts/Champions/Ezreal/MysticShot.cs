@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public class MysticShot : SkillShots {
-    private float timeToBeAlive = 4f;
+    private float timeToBeAlive = 2.5f;
     private float damage;
     private float armorPen;
-    private void Start() {
-        transform.rotation *= Quaternion.Euler(90, 0, 0);
-    }
+    private void Start() {}
     new private void HitSomething() {
         decideDamage();
         shotsConnectedIncrement();
@@ -30,10 +28,8 @@ public class MysticShot : SkillShots {
     }
     private void Update() {
         moveTowardsTargetLocation();
-        if(timeToBeAlive > 0)
-            timeToBeAlive -= Time.deltaTime;
-        else
-            Destroy(this.gameObject);
+        if(timeToBeAlive > 0) timeToBeAlive -= Time.deltaTime;
+        else Destroy(this.gameObject);
     }
     private void decideDamage() {
         if(armorPen > 0)    {

@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 // This is a script for HUD.
 public class Abilities : MonoBehaviour {
+    bool skill1 = false;
+    bool skill2 = false;
+    bool skill3 = false;
+    bool skill4 = false;
     public GenericChampion champion;
     public Image abilityImage1;
     float durationAbility1;
-    float cooldownDurationAbility1;
     bool ability1OnCooldown = false;
     public KeyCode abilityKeyCode1;
     // public Canvas ability1Canvas;
@@ -36,11 +39,8 @@ public class Abilities : MonoBehaviour {
         //skillShotIndicatorAbility1.GetComp1nt<Image>().enabled = false;
     }
     void Update() {
-        if(champion == null){
-            champion = GameObject.FindGameObjectWithTag("Player").GetComponent<GenericChampion>();
-        }
+        if(champion == null){ champion = GameObject.FindGameObjectWithTag("Player").GetComponent<GenericChampion>();}
         AbilitiesCast();
-        //Debug.Log("Q DURATION = " + durationAbility1); 
     }
     void AbilitiesCast() {
         Ability1();
@@ -49,15 +49,17 @@ public class Abilities : MonoBehaviour {
         Ability4();
     }
     void Ability1() {
-        if (    Input.GetKeyUp(abilityKeyCode1) && ability1OnCooldown == false
+        if (    Input.GetKeyUp(abilityKeyCode1) &&
+            (Input.GetKey(KeyCode.LeftAlt) == false && Input.GetKeyUp(KeyCode.LeftAlt) == false)
+                && ability1OnCooldown == false
                 && (champion.statsScript.GetMana() - champion.GetAbility1Cost() >= 0)
                 && (champion.GetAbility1Points() > -1)
         ) {
-            // Debug.Log("Abilities Script: Pressed Q");
+            Debug.Log("Abilities Script: Pressed Q");
             champion.UseAbility1();
             abilityImage1.fillAmount = 1;
             ability1OnCooldown = true;
-            durationAbility1 = cooldownDurationAbility1;
+            durationAbility1 = champion.GetAbility1Duration();
         }
         if (ability1OnCooldown && durationAbility1 > 0) {
             durationAbility1 -= Time.deltaTime;
@@ -77,7 +79,7 @@ public class Abilities : MonoBehaviour {
             champion.UseAbility2();
             abilityImage2.fillAmount = 1;
             ability2OnCooldown = true;
-            durationAbility2 = cooldownDurationAbility2;
+            durationAbility2 = champion.GetAbility2Duration();
         }
         if (ability2OnCooldown && durationAbility2 > 0) {
             durationAbility2 -= Time.deltaTime;
@@ -97,7 +99,7 @@ public class Abilities : MonoBehaviour {
             champion.UseAbility3();
             abilityImage3.fillAmount = 1;
             ability3OnCooldown = true;
-            durationAbility3 = cooldownDurationAbility3;
+            durationAbility3 = champion.GetAbility3Duration();
         }
         if (ability3OnCooldown && durationAbility3 > 0) {
             durationAbility3 -= Time.deltaTime;
@@ -117,7 +119,7 @@ public class Abilities : MonoBehaviour {
             champion.UseAbility4();
             abilityImage4.fillAmount = 1;
             ability4OnCooldown = true;
-            durationAbility4 = cooldownDurationAbility4;
+            durationAbility4 = champion.GetAbility4Duration();
         }
         if (ability4OnCooldown && durationAbility4 > 0) {
             durationAbility4 -= Time.deltaTime;
@@ -129,35 +131,51 @@ public class Abilities : MonoBehaviour {
             }
         }
     }
+    public void LowerAllCooldowns(float durationReduced) {
+        durationAbility1 -= durationReduced;
+        durationAbility2 -= durationReduced;
+        durationAbility3 -= durationReduced;
+        durationAbility4 -= durationReduced;
+    }
     public void LowerAllCooldowns() {
         durationAbility1 -= 1.5f;
         durationAbility2 -= 1.5f;
         durationAbility3 -= 1.5f;
         durationAbility4 -= 1.5f;
     }
-    public void SetCooldownDurationAbility1() {
-        cooldownDurationAbility1 = champion.GetAbility1Duration();
-        if(champion.GetAbility1Points() == 0)
+
+    public void levelSkill1() {
+        champion.LevelAbility1();
+        if (!skill1) {
             abilityImage1.fillAmount = 0;
-            // Debug.Log("You Can Use Ability Rank 1 => Points in: " + champion.GetAbility1Points() + "Duration: " + champion.GetAbility1Duration());
-            
+            skill1 = true;
+        }
     }
-    public void SetCooldownDurationAbility2() {
-        cooldownDurationAbility2 = champion.GetAbility2Duration();
-        if(champion.GetAbility2Points() == 0)
+
+    public void levelSkill2() {
+
+        champion.LevelAbility2();
+        if (!skill2) {
             abilityImage2.fillAmount = 0;
-            // Debug.Log("You Can Use Ability Rank 2 ");
+            skill2 = true;
+        }
     }
-    public void SetCooldownDurationAbility3() {
-        cooldownDurationAbility3 = champion.GetAbility3Duration();
-        if(champion.GetAbility3Points() == 0)
+
+    public void levelSkill3() {
+
+        champion.LevelAbility3();
+        if (!skill3) {
             abilityImage3.fillAmount = 0;
-            // Debug.Log("You Can Use Ability Rank 3 ");
+            skill3 = true;
+        }
     }
-    public void SetCooldownDurationAbility4() {
-        cooldownDurationAbility4 = champion.GetAbility4Duration();
-        if(champion.GetAbility4Points() == 0)
+
+    public void levelSkill4() {
+
+        champion.LevelAbility4();
+        if (!skill4) {
             abilityImage4.fillAmount = 0;
-            // Debug.Log("You Can Use Ability Rank 4 ");
+            skill4 = true;
+        }
     }
 }

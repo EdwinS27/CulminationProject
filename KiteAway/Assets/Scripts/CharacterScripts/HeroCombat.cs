@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public class HeroCombat : MonoBehaviour {
-    public enum HeroAttackType {Melee, Ranged};
-    [Header ("Animation Variables")]
+    public enum HeroAttackType { Melee, Ranged };
+    [Header("Animation Variables")]
     public HeroAttackType heroAttackType; // ENUM
     public GameObject offset;
     private bool isHeroAlive;
     private GameObject targetedEnemy;
-    [SerializeField]    private GameObject _projectileAuto;
+    [SerializeField] private GameObject _projectileAuto;
     public bool canPerformRangedAttack = true;
-    private bool canPerformMeleeAttack = false;
+    private bool canPerformMeleeAttack = true;
     // Scripts and Other Components
     private Animator _anim;
     private Stats statScript;
@@ -21,27 +21,26 @@ public class HeroCombat : MonoBehaviour {
         _anim = GetComponent<Animator>();
     }
     void Update() {
-        // if(targetedEnemy != null) {
-        //     // moveScript.AdjustRotationToTarget(targetedEnemy);
-        //     if(Vector3.Distance(transform.position, targetedEnemy.transform.position) > statScript.GetAttackRange())
-        //         moveScript.SetMovementFromHeroCombat(targetedEnemy.transform.position, statScript.GetAttackRange());
-        //     else {
-        //         if(heroAttackType == HeroAttackType.Melee && canPerformMeleeAttack){
-        //             StartCoroutine(MeleeAttackInterval());
-        //         }
-        //         else if(heroAttackType == HeroAttackType.Ranged && canPerformRangedAttack){
-        //             StartCoroutine(RangedAttackInterval());
-        //         }
-        //     }
-        // }
+        if (targetedEnemy != null) {
+            if (Vector3.Distance(transform.position, targetedEnemy.transform.position) > statScript.GetAttackRange())
+                moveScript.SetMovementFromHeroCombat(targetedEnemy.transform.position, statScript.GetAttackRange());
+            else {
+                if (heroAttackType == HeroAttackType.Melee && canPerformMeleeAttack) {
+                    StartCoroutine(MeleeAttackInterval());
+                }
+                else if (heroAttackType == HeroAttackType.Ranged && canPerformRangedAttack) {
+                    StartCoroutine(RangedAttackInterval());
+                }
+            }
+        }
     }
     IEnumerator MeleeAttackInterval() {
         canPerformMeleeAttack = false;
         _anim.SetBool("Basic Attack", true);
         yield return new WaitForSeconds(statScript.GetAttackTime() / (100 + statScript.GetAttackTime()) * .01f);
     }
-    public void MeleeAttack() {
-        if(targetedEnemy != null) {
+    void MeleeAttack() {
+        if (targetedEnemy != null) {
             if (targetedEnemy.GetComponent<Targetable>().GetEnemyType() == Targetable.EnemyType.MINION) {
                 // take damage
             }
@@ -49,23 +48,30 @@ public class HeroCombat : MonoBehaviour {
         canPerformMeleeAttack = true;
         _anim.SetBool("Basic Attack", false);
     }
+
+    public void notAttacking() {
+        _anim.SetBool("Basic Attack", false);
+        canPerformMeleeAttack = true;
+        canPerformRangedAttack = true;
+    }
+
     IEnumerator RangedAttackInterval() {
         canPerformRangedAttack = false;
         // moveScript.LockMovement(true);
         _anim.SetBool("Basic Attack", true);
-        float newAttackTime =  statScript.GetAttackTime() / (100 + statScript.GetAttackTime()) * .01f;
+        float newAttackTime = statScript.GetAttackTime() / (100 + statScript.GetAttackTime()) * .01f;
         yield return new WaitForSeconds(newAttackTime); // wait until we can attack again
-        if(targetedEnemy == null)   {
+        if (targetedEnemy == null) {
             _anim.SetBool("Basic Attack", false);
             canPerformRangedAttack = true;
         }
     }
-    public void RangedAttack() {
-        if(targetedEnemy != null) {
+    void RangedAttack() {
+        if (targetedEnemy != null) {
             if (targetedEnemy.GetComponent<Targetable>().GetEnemyType() == Targetable.EnemyType.MINION)
                 SpawnRangedProjectile(targetedEnemy);
         }
-        else{
+        else {
             canPerformRangedAttack = true;
             _anim.SetBool("Basic Attack", false);
             // moveScript.LockMovement(false);
@@ -81,9 +87,9 @@ public class HeroCombat : MonoBehaviour {
         auto.GetComponent<RangedAutoAttack>().SetTarget(this.gameObject, targetedEnemy, true, damage, armorPen, missileSpeed);
         canPerformRangedAttack = true;
         _anim.SetBool("Basic Attack", false);
-        // moveScript.LockMovement(false);
+        moveScript.LockMovement(false);
     }
     // getters and setters
-    public GameObject getTargetedEnemy(){return this.targetedEnemy;}
-    public void setTargetedEnemy(GameObject targetedEnemy){this.targetedEnemy = targetedEnemy;}
+    public GameObject getTargetedEnemy() { return this.targetedEnemy; }
+    public void setTargetedEnemy(GameObject targetedEnemy) => this.targetedEnemy = targetedEnemy;
 }

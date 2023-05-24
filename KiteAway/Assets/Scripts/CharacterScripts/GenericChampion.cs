@@ -158,8 +158,7 @@ public class GenericChampion : MonoBehaviour    {
         if(currentLevel != 18){
             return xpRequiredToLevelUp[currentLevel + 1];
         }
-        else
-            return 0;
+        return 0;
     }
     public void AddGold(int moreGold){this.gold += moreGold;}
     public int GetXP(){return currentXP;}

@@ -13,7 +13,8 @@ public class EnemyMovement : MonoBehaviour   {
     public void MoveTowardsEnemy(){
         if(character != null){
             playerCharactersLocation = character.GetComponent<Transform>().position;
-            transform.position = Vector3.MoveTowards(transform.position, playerCharactersLocation, statsScript.GetMoveSpeed() * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position,
+                playerCharactersLocation, statsScript.GetMoveSpeed() * Time.deltaTime);
             var lookAtTarget = new Vector3(
                 playerCharactersLocation.x - transform.position.x,
                 0,

@@ -16,6 +16,7 @@ public class RangedAutoAttack : MonoBehaviour   {
             if(target == null) // removing this kills the player ???????????
                 Destroy(this.gameObject);
             else{
+
                 // var lookAtTarget = new Vector3(
                 //     target.transform.position.x - transform.position.x,
                 //     0,
@@ -29,7 +30,22 @@ public class RangedAutoAttack : MonoBehaviour   {
                 //         missileSpeed * Time.deltaTime
                 //     );
                 // }
-                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, missileSpeed * Time.deltaTime);
+
+
+                var adjustedPos = target.transform.position;
+                adjustedPos.y = .85f;
+                transform.position = Vector3.MoveTowards(transform.position, adjustedPos, missileSpeed * Time.deltaTime);
+
+                var lookAtTarget = new Vector3(
+                    this.sentFrom.GetComponent<Transform>().position.x - transform.position.x,
+                    0,
+                    this.sentFrom.GetComponent<Transform>().position.z - transform.position.z
+                );
+                var charRotation = Quaternion.LookRotation(lookAtTarget);
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    charRotation,
+                    Time.deltaTime);
             }
         }
     }
